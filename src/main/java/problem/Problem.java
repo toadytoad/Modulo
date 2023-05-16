@@ -1,6 +1,8 @@
+package problem;
+
 public class Problem {
-    String question;
-    int[] solutions;
+    private final String question;
+    private final int[] solutions;
     public Problem(String question, int[] solutions){
         this.question= question;
         this.solutions=solutions;
