@@ -1,78 +1,35 @@
 package problem;
+import org.scilab.forge.jlatexmath.TeXConstants;
+import org.scilab.forge.jlatexmath.TeXFormula;
+import org.scilab.forge.jlatexmath.TeXIcon;
+import org.scilab.forge.jlatexmath.TeXParser;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
 
 public class LatexParser {
-    public static JComponent parseProblem(Problem p){
-        String s = p.getProblem();
-        JComponent ret = new JPanel();
-        StringBuilder num = new StringBuilder();
-        int x = 0;
-        for(int i= 0; i<s.length(); i++){
-            if(s.charAt(i)>='0'&&s.charAt(i)<='9'||s.charAt(i)=='x'||s.charAt(i)=='y'){
-                num.append(s.charAt(i));
-            } else {
-                if(!num.toString().equals("")){
-                    JComponent n = new JTextArea(num.toString());
-                    n.setFont(new Font("Ariel", Font.PLAIN, 40));
-                    n.setOpaque(false);
-                    n.setEnabled(false);
-                    n.setAlignmentX(x);
-                    x+=n.getWidth();
-                    ret.add(n);
-                    num = new StringBuilder();
-                }
-                if(s.charAt(i)=='+'){
-                    JComponent n = new JTextArea("+");
-                    n.setFont(new Font("Ariel", Font.PLAIN, 40));
-                    n.setOpaque(false);
-                    n.setEnabled(false);
-                    n.setAlignmentX(x);
-                    x+=n.getWidth();
-                    ret.add(n);
-                }
-                if(s.charAt(i)=='*'){
-                    JComponent n = new JTextArea("\u00d7");
-                    n.setFont(new Font("Ariel", Font.PLAIN, 40));
-                    n.setOpaque(false);
-                    n.setEnabled(false);
-                    n.setAlignmentX(x);
-                    x+=n.getWidth();
-                    ret.add(n);
-                }
-                if(s.charAt(i)=='-'){
-                    JComponent n = new JTextArea("-");
-                    n.setFont(new Font("Ariel", Font.PLAIN, 40));
-                    n.setOpaque(false);
-                    n.setEnabled(false);
-                    n.setAlignmentX(x);
-                    x+=n.getWidth();
-                    ret.add(n);
-                }
-                if(s.charAt(i)=='/'){
-                    JComponent n = new JTextArea("\u00f7");
-                    n.setFont(new Font("Ariel", Font.PLAIN, 40));
-                    n.setOpaque(false);
-                    n.setEnabled(false);
-                    n.setAlignmentX(x);
-                    x+=n.getWidth();
-                    ret.add(n);
-                }
-            }
-        }
-        if(!num.toString().equals("")){
 
-            JComponent n = new JTextArea(num.toString());
-            n.setFont(new Font("Ariel", Font.PLAIN, 40));
-            n.setOpaque(false);
-            n.setEnabled(false);
-            n.setAlignmentX(x);
-            x+=n.getWidth();
-            ret.add(n);
-        }
-        return ret;
+    public static BufferedImage parseProblem(String s, int f) {
+        TeXFormula tf = new TeXFormula(s);
+
+        TeXIcon ti = tf.createTeXIcon(TeXConstants.STYLE_TEXT, f);
+        BufferedImage bimg = new BufferedImage(ti.getIconWidth(), ti.getIconHeight(), BufferedImage.TYPE_4BYTE_ABGR);
+        Graphics2D g2d = bimg.createGraphics();
+        JLabel jl = new JLabel();
+        jl.setForeground(new Color(0, 0, 0));
+        ti.paintIcon(jl, g2d, 0, 0);
+
+        File out = new File("./out.png");
+        try {
+            ImageIO.write(bimg, "png", out);
+        } catch(Exception e){}
+        return bimg;
     }
-    private static JComponent parseFraction(String s){
-        return null;
-    }
+
 }

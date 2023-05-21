@@ -3,6 +3,7 @@ package problem;
 import java.util.Random;
 
 public class ProblemFactory {
+    @Deprecated
     public static Problem getAdditionProblem(int dif){
         Random rand = new Random();
         StringBuilder question = new StringBuilder();
@@ -30,25 +31,30 @@ public class ProblemFactory {
             a = rand.nextInt((int) Math.pow(10, dif));
             b = rand.nextInt((int) Math.pow(10, dif));
         }
-        int ans = -1;
+        int ans;
+        String op;
         if(type == '+'){
             ans = a+b;
+            op = "+";
         }
         else if(type=='*'){
             ans = a*b;
+            op="\\times";
         }
         else if(type=='-'){
             ans = a-b;
+            op="-";
 
         } else if(type=='/'){
             ans = a;
             a = ans*b;
+            op="\\div";
         }
         else {
             throw new IllegalArgumentException();
         }
         question.append(a);
-        question.append(type);
+        question.append(op);
         question.append(b);
         return new Problem(question.toString(), new int[]{ans});
     }
