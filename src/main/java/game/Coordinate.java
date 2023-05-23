@@ -1,4 +1,4 @@
-package Game;
+package game;
 
 /**
  * <h1>Coordinate</h1>
