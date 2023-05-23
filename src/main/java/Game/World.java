@@ -16,7 +16,7 @@ public class World extends JComponent implements MouseListener {
     private final Tile[][] map;
     Coordinate playerCoordinate;
     java.util.List<Button> buttons;
-    final static int TILE_LENGTH = 50;
+    final static int TILE_LENGTH = 80;
 
     public World (int rows, int columns) {
         map = new Tile[rows][columns];
