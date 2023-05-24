@@ -37,6 +37,8 @@ public class WorldTest {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(800,800);
         frame.add(world);
+        frame.addMouseListener(world);
+        frame.addKeyListener(world);
         frame.setVisible(true);
 
     }

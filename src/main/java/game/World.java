@@ -2,6 +2,8 @@ package game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -12,9 +14,9 @@ import java.util.ArrayList;
  * @author Luke Mathieu
  */
 
-public class World extends JComponent implements MouseListener {
+public class World extends JComponent implements MouseListener, KeyListener {
     private final Tile[][] map;
-    Coordinate playerCoordinate;
+    Player player;
     java.util.List<Button> buttons;
     final static int TILE_LENGTH = 80;
 
@@ -34,7 +36,10 @@ public class World extends JComponent implements MouseListener {
                 map[i][j].paint(g,i*TILE_LENGTH, j*TILE_LENGTH,TILE_LENGTH,TILE_LENGTH );
             }
         }
+        player.paint(g,TILE_LENGTH,TILE_LENGTH);
         repaint();
+
+
     }
 
     @Override
@@ -51,6 +56,26 @@ public class World extends JComponent implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {}
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        switch (e.getKeyChar()) {
+            case 'w': {
+
+            }
+            case 's': {
+
+            }
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+    }
 
     abstract class Button {
         Rectangle box;
