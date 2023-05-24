@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class World extends JComponent implements MouseListener, KeyListener {
     private final Tile[][] map;
-    Player player;
+    Player player = new Player(0, 0);
     java.util.List<Button> buttons;
     final static int TILE_LENGTH = 80;
 
@@ -36,10 +36,8 @@ public class World extends JComponent implements MouseListener, KeyListener {
                 map[i][j].paint(g,i*TILE_LENGTH, j*TILE_LENGTH,TILE_LENGTH,TILE_LENGTH );
             }
         }
-        player.paint(g,TILE_LENGTH,TILE_LENGTH);
-        repaint();
-
-
+        player.move();
+        player.paint(g,TILE_LENGTH*player.coordinate.x,TILE_LENGTH*player.coordinate.y,TILE_LENGTH, TILE_LENGTH);
     }
 
     @Override
@@ -63,18 +61,27 @@ public class World extends JComponent implements MouseListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        int x = 0, y = 0;
         switch (e.getKeyChar()) {
-            case 'w': {
-
-            }
-            case 's': {
-
-            }
+            case 'w':
+                y -= 1;
+                break;
+            case 's':
+                y += 1;
+                break;
+            case 'a':
+                x -= 1;
+                break;
+            case 'd':
+                x += 1;
+                break;
         }
+        player.setMovement(x, y);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        player.setMovement(0, 0);
     }
 
     abstract class Button {

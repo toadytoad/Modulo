@@ -2,6 +2,8 @@ package game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 /**
@@ -13,6 +15,7 @@ import java.awt.*;
  */
 
 public class WorldTest {
+    static JFrame frame;
 
     public static void main (String[] args) {
         Tile[][] map = new Tile[10][10];
@@ -33,13 +36,14 @@ public class WorldTest {
         }
 
         World world = new World(map);
-        JFrame frame = new JFrame("World Test");
+        frame = new JFrame("World Test");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(800,800);
         frame.add(world);
         frame.addMouseListener(world);
         frame.addKeyListener(world);
         frame.setVisible(true);
-
+        Timer timer = new Timer(100, e -> frame.getContentPane().repaint());
+        timer.start();
     }
 }
