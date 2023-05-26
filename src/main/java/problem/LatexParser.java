@@ -14,7 +14,9 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class LatexParser {
-
+    public static BufferedImage parseProblem(Problem p, int f){
+        return parseProblem(p.getProblem(), f);
+    }
     public static BufferedImage parseProblem(String s, int f) {
         TeXFormula tf = new TeXFormula(s);
 
