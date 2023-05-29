@@ -53,7 +53,7 @@ public class Tile {
         g.drawImage(sprite, coordinate.x, coordinate.y, null);
     }
 
-    public void paint (Graphics g, int x, int y, int width, int height) {
-        g.drawImage(sprite, x, y, width, height, null);
+    public void paint (Graphics g, int x, int y, int tileLength) {
+        g.drawImage(sprite, x*tileLength, y*tileLength, tileLength, tileLength, null);
     }
 }

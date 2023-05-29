@@ -32,7 +32,7 @@ public class World extends JComponent implements MouseListener, KeyListener {
     public void paint (Graphics g) {
         for (int i = 0; i < tilesOnScreen.x && i < map.length; i++) {
             for (int j = 0; j < tilesOnScreen.y && j < map[0].length; j++) {
-                map[screenOffset.x + i][screenOffset.y + j].paint(g,i*TILE_LENGTH, j*TILE_LENGTH,TILE_LENGTH,TILE_LENGTH );
+                map[screenOffset.x + i][screenOffset.y + j].paint(g,i, j,TILE_LENGTH);
             }
         }
 
@@ -54,6 +54,9 @@ public class World extends JComponent implements MouseListener, KeyListener {
         if (playerCoordinatesOnScreen.y >= tilesOnScreen.y - 3 && screenOffset.y < map.length - tilesOnScreen.y) {
             screenOffset = new Coordinate(screenOffset.x, screenOffset.y + 1);
         }
+        /*
+        TODO: fine tune numbers in if statement
+         */
 
         player.paint(g,TILE_LENGTH, screenOffset);
     }
