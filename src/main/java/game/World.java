@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class World extends JComponent implements MouseListener, KeyListener {
     private final Tile[][] map;
+
     Player player = new Player(0, 0);
-    java.util.List<Button> buttons;
     private Coordinate screenOffset;
     private final Coordinate tilesOnScreen;
     final static int TILE_LENGTH = 60;
@@ -26,7 +26,6 @@ public class World extends JComponent implements MouseListener, KeyListener {
         screenOffset = new Coordinate(0, 0);
         this.map = map;
         tilesOnScreen = new Coordinate(screenSize.x / TILE_LENGTH+1, screenSize.y / TILE_LENGTH+1);
-        buttons = new ArrayList<>();
     }
 
     public void paint (Graphics g) {
@@ -102,8 +101,4 @@ public class World extends JComponent implements MouseListener, KeyListener {
         player.setMovement(0, 0);
     }
 
-    abstract class Button {
-        Rectangle box;
-        public abstract void interact();
-    }
 }
