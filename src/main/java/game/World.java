@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class World extends JComponent implements MouseListener {
     private final Tile[][] map;
     Coordinate playerCoordinate;
-    java.util.List<Button> buttons;
     final static int TILE_LENGTH = 80;
 
     public World (int rows, int columns) {
@@ -24,8 +23,6 @@ public class World extends JComponent implements MouseListener {
 
     public World (Tile[][] map) {
         this.map = map;
-        buttons = new ArrayList<>();
-
     }
 
     public void paint (Graphics g) {
@@ -51,9 +48,4 @@ public class World extends JComponent implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {}
-
-    abstract class Button {
-        Rectangle box;
-        public abstract void interact();
-    }
 }
