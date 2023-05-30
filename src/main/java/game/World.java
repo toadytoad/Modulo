@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
+
 /**
  * <h1>World</h1>
  * Class to store and display the map of a single level of the game.
@@ -17,22 +17,20 @@ import java.util.ArrayList;
 public class World extends JComponent implements MouseListener, KeyListener {
     private final Tile[][] map;
     Player player = new Player(0, 0);
-    java.util.List<Button> buttons;
     private Coordinate screenOffset;
     private final Coordinate tilesOnScreen;
-    final static int TILE_LENGTH = 60;
+    public final static int TILE_LENGTH = 60;
 
     public World (Tile[][] map, Coordinate screenSize) {
         screenOffset = new Coordinate(0, 0);
         this.map = map;
         tilesOnScreen = new Coordinate(screenSize.x / TILE_LENGTH+1, screenSize.y / TILE_LENGTH+1);
-        buttons = new ArrayList<>();
     }
 
     public void paint (Graphics g) {
         for (int i = 0; i < tilesOnScreen.x && i < map.length; i++) {
             for (int j = 0; j < tilesOnScreen.y && j < map[0].length; j++) {
-                map[screenOffset.x + i][screenOffset.y + j].paint(g,i, j,TILE_LENGTH);
+                map[screenOffset.x + i][screenOffset.y + j].paint(g,i, j);
             }
         }
 
@@ -57,8 +55,7 @@ public class World extends JComponent implements MouseListener, KeyListener {
         /*
         TODO: fine tune numbers in if statement
          */
-
-        player.paint(g,TILE_LENGTH, screenOffset);
+        player.paint(g, screenOffset);
     }
 
     @Override
@@ -103,10 +100,5 @@ public class World extends JComponent implements MouseListener, KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         player.setMovement(0, 0);
-    }
-
-    abstract class Button {
-        Rectangle box;
-        public abstract void interact();
     }
 }
