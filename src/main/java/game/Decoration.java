@@ -4,13 +4,18 @@ import java.awt.*;
 import java.util.HashMap;
 
 public class Decoration {
-    private DecorationImage decorationImage;
-    private Coordinate coordinate;
+    public final DecorationImage decorationImage;
+    public final Coordinate coordinate;
     private final static HashMap<String, DecorationImage> decorationSprites;
 
     static {
         decorationSprites = new HashMap<>();
         decorationSprites.put("TREE", new DecorationImage(Toolkit.getDefaultToolkit().getImage("src/main/java/assets/decorations/tree.png"), new Coordinate(3,4)));
+    }
+
+    public Decoration (String decorationType, Coordinate coordinate) {
+        decorationImage = decorationSprites.get(decorationType);
+        this.coordinate = coordinate;
     }
 
     public void paint (Graphics g, Coordinate screenOffset) {

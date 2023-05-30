@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 
 /**
  * <h1>World</h1>
@@ -16,14 +17,16 @@ import java.awt.event.MouseListener;
 
 public class World extends JComponent implements MouseListener, KeyListener {
     private final Tile[][] map;
+    private final java.util.List<Decoration> decorationLayer;
     Player player = new Player(0, 0);
     private Coordinate screenOffset;
     private final Coordinate tilesOnScreen;
     public final static int TILE_LENGTH = 60;
 
-    public World (Tile[][] map, Coordinate screenSize) {
+    public World (Tile[][] map, List<Decoration> decorationLayer, Coordinate screenSize) {
         screenOffset = new Coordinate(0, 0);
         this.map = map;
+        this.decorationLayer = decorationLayer;
         tilesOnScreen = new Coordinate(screenSize.x / TILE_LENGTH+1, screenSize.y / TILE_LENGTH+1);
     }
 
@@ -31,6 +34,15 @@ public class World extends JComponent implements MouseListener, KeyListener {
         for (int i = 0; i < tilesOnScreen.x && i < map.length; i++) {
             for (int j = 0; j < tilesOnScreen.y && j < map[0].length; j++) {
                 map[screenOffset.x + i][screenOffset.y + j].paint(g,i, j);
+            }
+        }
+
+        for (Decoration decoration : decorationLayer) {
+            if (decoration.coordinate.x + decoration.decorationImage.size.x > screenOffset.x
+                    && decoration.coordinate.y + decoration.decorationImage.size.y > screenOffset.y
+                    && decoration.coordinate.x < screenOffset.x + tilesOnScreen.x
+                    && decoration.coordinate.x < screenOffset.x + tilesOnScreen.x) {
+                decoration.paint(g, screenOffset);
             }
         }
 
