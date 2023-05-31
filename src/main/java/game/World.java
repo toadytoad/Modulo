@@ -4,8 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,19 +14,20 @@ import java.util.List;
  * @author Luke Mathieu
  */
 
-public class World extends JComponent implements MouseListener, KeyListener {
+public class World extends JComponent implements KeyListener {
     private final Tile[][] map;
     private final java.util.List<Decoration> decorationLayer;
     Player player = new Player(0, 0);
     private Coordinate screenOffset;
     private final Coordinate tilesOnScreen;
     public final static int TILE_LENGTH = 60;
+    public final static Coordinate SCREEN_SIZE = new Coordinate(Toolkit.getDefaultToolkit().getScreenSize());
 
-    public World (Tile[][] map, List<Decoration> decorationLayer, Coordinate screenSize) {
+    public World (Tile[][] map, List<Decoration> decorationLayer) {
         screenOffset = new Coordinate(0, 0);
         this.map = map;
         this.decorationLayer = decorationLayer;
-        tilesOnScreen = new Coordinate(screenSize.x / TILE_LENGTH+1, screenSize.y / TILE_LENGTH+1);
+        tilesOnScreen = new Coordinate(SCREEN_SIZE.x / TILE_LENGTH+1, SCREEN_SIZE.y / TILE_LENGTH+1);
     }
 
     public void paint (Graphics g) {
@@ -46,8 +46,14 @@ public class World extends JComponent implements MouseListener, KeyListener {
             }
         }
 
-        if (player.movingTo().x < map.length && player.movingTo().x >= 0 && player.movingTo().y < map[0].length && player.movingTo().y >= 0) {
-            if (map[player.coordinate.x + player.xMovement][player.coordinate.y + player.yMovement].getWalkable()) {
+        Coordinate movingTo = player.movingTo();
+        if (movingTo.x < map.length && movingTo.x >= 0 && movingTo.y < map[0].length && movingTo.y >= 0) {
+            if (map[movingTo.x][movingTo.y] instanceof Door) {
+                player.setMovement(0, 0);
+//                player.coordinate = new Coordinate(0, 0);
+                map[movingTo.x][movingTo.y].interact();
+            }
+            else if (map[movingTo.x][movingTo.y].getWalkable()) {
                 player.move();
             }
         }
@@ -69,21 +75,6 @@ public class World extends JComponent implements MouseListener, KeyListener {
          */
         player.paint(g, screenOffset);
     }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {}
-
-    @Override
-    public void mousePressed(MouseEvent e) {}
-
-    @Override
-    public void mouseReleased(MouseEvent e) {}
-
-    @Override
-    public void mouseEntered(MouseEvent e) {}
-
-    @Override
-    public void mouseExited(MouseEvent e) {}
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -112,5 +103,42 @@ public class World extends JComponent implements MouseListener, KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         player.setMovement(0, 0);
+    }
+
+    /**
+     * Generates a random World containing only walkable and non-walkable Tiles.
+     * @return A new World object, with a random map of walkable and non-walkable Tiles.
+     */
+    public static World generateRandomWorld(Coordinate size) {
+        Tile[][] map = new Tile[size.x][size.y];
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[0].length; j++) {
+                int random = (int)(Math.random()*4);
+                if (random == 0) {
+                    map[i][j] = new Tile("WORLD1_GRASSTILE01", false);
+                } else {
+                    map[i][j] = new Tile("WORLD1_PATHTILE_FULLPATH", true);
+                }
+            }
+        }
+        return new World(map, new ArrayList<>());
+    }
+
+    /**
+     * Generates a random world (see generateRandomWorld()) with a single door, which leads to the
+     * world given by doorTarget
+     * @param size The size of the World to be generated.
+     * @param doorTarget The world index that the door will lead to.
+     * @return A new random World object, containing a single Door to another World.
+     */
+    public static World generateRandomWorldWithDoors (Coordinate size, int doorTarget) {
+        World world = generateRandomWorld(size);
+        Coordinate doorCoordinate = new Coordinate((int)(Math.random()*size.x), (int)(Math.random()*size.y));
+        world.map[doorCoordinate.x][doorCoordinate.y] = new Door("TEXTURENOTFOUND_ERRORTILE", doorTarget);
+        return world;
+    }
+
+    public static World generateWorldFromFile (String path) {
+        return null;
     }
 }

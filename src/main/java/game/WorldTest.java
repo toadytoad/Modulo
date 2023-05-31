@@ -41,10 +41,9 @@ public class WorldTest {
 
         JFrame frame = new JFrame("World Test");
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        World world = new World(map, decorationList, new Coordinate(Toolkit.getDefaultToolkit().getScreenSize()));
+        World world = new World(map, decorationList);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.add(world);
-        frame.addMouseListener(world);
         frame.addKeyListener(world);
         frame.setVisible(true);
         Timer timer = new Timer(100, e -> frame.getContentPane().repaint());

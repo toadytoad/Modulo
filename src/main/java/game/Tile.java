@@ -43,9 +43,7 @@ public class Tile {
         this.isWalkable = isWalkable;
     }
 
-    public void interact() {
-
-    }
+    public void interact() {}
 
     public boolean getWalkable() {return isWalkable;}
 
