@@ -26,7 +26,12 @@ private final Image sprite = Toolkit.getDefaultToolkit().getImage("src/main/java
         yMovement = y;
     }
 
+    public Coordinate getMovement() {
+        return new Coordinate(xMovement, yMovement);
+    }
+
     public void paint (Graphics g, Coordinate screenOffset) {
         g.drawImage(sprite, (coordinate.x- screenOffset.x)*World.TILE_LENGTH, (coordinate.y-screenOffset.y)*World.TILE_LENGTH-World.TILE_LENGTH/2, World.TILE_LENGTH, World.TILE_LENGTH *3/2, null);
+        g.drawString(coordinate.toString(),(coordinate.x- screenOffset.x)*World.TILE_LENGTH, (coordinate.y-screenOffset.y + 1)*World.TILE_LENGTH + 10);
     }
 }

@@ -9,8 +9,8 @@ public class Game {
 
     static {
         worlds = new World[10];
-        worlds[0] = World.generateRandomWorldWithDoors(new Coordinate(40, 20), 1);
-        worlds[1] = World.generateRandomWorldWithDoors(new Coordinate(10, 10), 0);
+        worlds[0] = World.generateRandomWorldWithDoors(new Coordinate(100, 50), 1);
+        worlds[1] = World.generateRandomWorldWithDoors(new Coordinate(50, 100), 0);
     }
 
 
