@@ -46,7 +46,9 @@ public class Tile {
     public void interact() {
 
     }
-
+    public void setImage(String tileImage){
+        this.sprite = tileSprites.get(tileImage);
+    }
     public boolean getWalkable() {return isWalkable;}
 
     public void paint (Graphics g, Coordinate coordinate) {
