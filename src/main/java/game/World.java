@@ -4,8 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.SQLOutput;
+import java.util.*;
 import java.util.List;
 
 /**
@@ -46,6 +49,11 @@ public class World extends JComponent implements KeyListener {
         }
     }
 
+    public World (Tile[][] map, List<Decoration> decorationLayer, Coordinate playerCoordinates) {
+        this(map, decorationLayer);
+        this.player.coordinate = playerCoordinates;
+    }
+
     public void paint (Graphics g) {
         for (int i = Math.max(0, screenOffset.x); i < tilesOnScreen.x + screenOffset.x && i < map.length; i++) {
             for (int j = Math.max(0, screenOffset.y); j < tilesOnScreen.y + screenOffset.y && j < map[0].length; j++) {
@@ -70,7 +78,6 @@ public class World extends JComponent implements KeyListener {
 
         player.setMovement(x, y);
 
-        // TODO: stop player from moving diagonally through tiles
         Coordinate movingTo = player.movingTo();
         if (movingTo.x < map.length && movingTo.x >= 0 && movingTo.y < map[0].length && movingTo.y >= 0) {
             if (map[movingTo.x][movingTo.y] instanceof Door) {
@@ -78,7 +85,9 @@ public class World extends JComponent implements KeyListener {
 //                player.coordinate = new Coordinate(0, 0);
                 map[movingTo.x][movingTo.y].interact();
             }
-            else if (map[movingTo.x][movingTo.y].getWalkable()) {
+            else if (map[movingTo.x][movingTo.y].getWalkable()
+                    && map[movingTo.x][player.coordinate.y].getWalkable()
+                    && map[player.coordinate.x][movingTo.y].getWalkable()) {
                 player.move();
             }
         }
@@ -99,7 +108,7 @@ public class World extends JComponent implements KeyListener {
         TODO: fine tune numbers in if statement
          */
         player.paint(g, screenOffset);
-        System.out.print(screenOffset + "\t" + player.coordinate + "\n");
+//        System.out.print(screenOffset + "\t" + player.coordinate + "\n");
     }
 
     @Override
@@ -132,6 +141,7 @@ public class World extends JComponent implements KeyListener {
                 }
             }
         }
+        map[0][0] = new Tile ("WORLD1_PATHTILE_FULLPATH", true);
         return new World(map, new ArrayList<>());
     }
 
@@ -150,6 +160,38 @@ public class World extends JComponent implements KeyListener {
     }
 
     public static World generateWorldFromFile (String path) {
-        return null;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(path));
+            StringTokenizer st = new StringTokenizer(reader.readLine());
+            Tile[][] map = new Tile[Integer.parseInt(st.nextToken())][Integer.parseInt(st.nextToken())];
+            Coordinate playerCoordinate = new Coordinate(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
+
+            for (int i = 0; i < map.length; i++) {
+                for (int j = 0; j < map[0].length; j++) {
+                    st = new StringTokenizer(reader.readLine());
+                    String token;
+                    switch (token = st.nextToken()) {
+                        case "DOOR":
+                            map[i][j] = new Door("TEXTURENOTFOUND_ERRORTILE", Integer.parseInt(token));
+                            break;
+                        default:
+                            map[i][j] = new Tile(token, Boolean.parseBoolean(st.nextToken()));
+                            break;
+                    }
+                }
+            }
+            reader.readLine(); // To remove the *** line from the input file
+            List<Decoration> decorationList = new ArrayList<>();
+            String line;
+            while ((line = reader.readLine()) != null ) {
+                st = new StringTokenizer(line);
+                decorationList.add(new Decoration(st.nextToken(), new Coordinate(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()))));
+            }
+            return new World(map, decorationList, playerCoordinate);
+        } catch (IOException e) {
+            System.out.println("File " + path + " is formatted improperly.");
+            System.exit(-1);
+            return null;
+        }
     }
 }
