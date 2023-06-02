@@ -43,9 +43,9 @@ public class Tile {
         this.isWalkable = isWalkable;
     }
 
-    public void interact() {
 
-    }
+    public void interact() {}
+
     public void setImage(String tileImage){
         this.sprite = tileSprites.get(tileImage);
     }
@@ -55,7 +55,7 @@ public class Tile {
         g.drawImage(sprite, coordinate.x, coordinate.y, null);
     }
 
-    public void paint (Graphics g, int x, int y, int width, int height) {
-        g.drawImage(sprite, x, y, width, height, null);
+    public void paint (Graphics g, int x, int y, Coordinate screenOffset) {
+        g.drawImage(sprite, (x-screenOffset.x)*World.TILE_LENGTH, (y-screenOffset.y)*World.TILE_LENGTH, World.TILE_LENGTH, World.TILE_LENGTH, null);
     }
 }
