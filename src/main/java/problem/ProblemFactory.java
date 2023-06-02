@@ -2,12 +2,7 @@ package problem;
 
 import java.util.Random;
 
-import static jdk.nashorn.internal.objects.Global.print;
-
 public class ProblemFactory {
-    static {
-
-    }
     @Deprecated
     public static Problem getAdditionProblem(int dif){
         Random rand = new Random();
@@ -24,9 +19,21 @@ public class ProblemFactory {
         }
         return new Problem(question.toString(), new int[]{sum});
     }
+    public static Problem getSimpleProblem(int dif, char type, int a){
+        Random rand = new Random();
+        int b;
+        if(type=='/'){
+            b = rand.nextInt((int)Math.pow(10, Math.ceil((double)dif/2)))+1;
+        } else if(type=='^') {
+            b = rand.nextInt(3)+2;
+        }
+        else {
+            b = rand.nextInt((int) Math.pow(10, dif))+1;
+        }
+        return getSimpleProblem(type, a, b);
+    }
     public static Problem getSimpleProblem(int dif, char type){
         Random rand = new Random();
-        StringBuilder question = new StringBuilder();
         int a;
         int b;
         if(type=='/'){
@@ -40,6 +47,12 @@ public class ProblemFactory {
             a = rand.nextInt((int) Math.pow(10, dif))+1;
             b = rand.nextInt((int) Math.pow(10, dif))+1;
         }
+        return getSimpleProblem(type, a, b);
+    }
+    public static Problem getSimpleProblem(char type, int a, int b){
+
+        StringBuilder question = new StringBuilder();
+
         int ans;
         String op;
         String suf = "";
@@ -73,9 +86,8 @@ public class ProblemFactory {
         question.append(suf);
         return new Problem(question.toString(), new int[]{ans});
     }
-    public static Problem getLinearEquation(int min, int max, String var){
+    public static Problem getLinearEquation(int min, int max, String var, int x){
         Random r = new Random();
-        int x = r.nextInt(max-min)+min;
         int c = r.nextInt(max-min)+3;
         if(r.nextBoolean()){
             c = -c;
@@ -86,10 +98,8 @@ public class ProblemFactory {
         System.out.println(c+" "+a+" "+b+" "+x);
         return new Problem(c+var+(a==0?"":a<0?a:"+"+a)+"="+b, new int[]{x});
     }
-    public static Problem getSystem(int min, int max){
+    public static Problem getSystem(int min, int max, int x, int y){
         Random r = new Random();
-        int x = r.nextInt(max-min)+min;
-        int y = r.nextInt(max-min)+min;
         int[][] mat = new int[2][2];
 
         int[] b = new int[2];
