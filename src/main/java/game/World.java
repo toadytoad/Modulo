@@ -7,7 +7,6 @@ import java.awt.event.KeyListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.*;
 import java.util.List;
 
@@ -21,6 +20,7 @@ import java.util.List;
 public class World extends JComponent implements KeyListener {
     private final Tile[][] map;
     private final java.util.List<Decoration> decorationLayer;
+    private static final java.util.List<Popup> popupLayer = new ArrayList<>();
     Player player = new Player(0, 0);
     private Coordinate screenOffset;
     private final Coordinate tilesOnScreen;
@@ -109,6 +109,21 @@ public class World extends JComponent implements KeyListener {
          */
         player.paint(g, screenOffset);
 //        System.out.print(screenOffset + "\t" + player.coordinate + "\n");
+        for (Popup popup : popupLayer) {
+            popup.paint(g);
+        }
+    }
+
+    public static void addPopup (Popup popup) {
+        popupLayer.add(popup);
+        Game.frame.addMouseMotionListener(popup);
+        Game.frame.addMouseListener(popup);
+    }
+
+    public static void removePopup (Popup popup) {
+        popupLayer.remove(popup);
+        Game.frame.removeMouseMotionListener(popup);
+        Game.frame.removeMouseListener(popup);
     }
 
     @Override

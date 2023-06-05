@@ -26,7 +26,7 @@ public class Popup implements MouseListener, MouseMotionListener {
         if(this.isVisible) {
             for (Button b : buttons) {
                 if(b.isVisible&&b.bounds.contains(e.getPoint()))
-                b.onClicked();
+                    b.onClicked();
             }
         }
     }
@@ -36,7 +36,7 @@ public class Popup implements MouseListener, MouseMotionListener {
         if(this.isVisible) {
             for (Button b : buttons) {
                 if(b.isVisible&&b.bounds.contains(e.getPoint()))
-                b.setToClicked();
+                    b.setToClicked();
             }
         }
     }
@@ -46,7 +46,7 @@ public class Popup implements MouseListener, MouseMotionListener {
         if(this.isVisible) {
             for (Button b : buttons) {
                 if(b.isVisible&&b.bounds.contains(e.getPoint()))
-                b.onReleased();
+                    b.onReleased();
             }
         }
     }
@@ -60,9 +60,7 @@ public class Popup implements MouseListener, MouseMotionListener {
     public void mouseExited(MouseEvent e) {}
 
     @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
+    public void mouseDragged(MouseEvent e) {}
 
     @Override
     public void mouseMoved(MouseEvent e) {
@@ -109,11 +107,15 @@ public class Popup implements MouseListener, MouseMotionListener {
         int x,y;
         boolean isVisible;
         Rectangle bounds;
-        public Button(Image def, Image hovering, Image clicked){
+        public Button(Image def, Image hovering, Image clicked, int x, int y, boolean isVisible, Rectangle bounds){
             this.def=def;
             this.hovering = hovering;
             this.clicked = clicked;
             this.current = def;
+            this.x = x;
+            this.y = y;
+            this.isVisible = isVisible;
+            this.bounds = bounds;
         }
         public Image getImage(){
             return this.current;
