@@ -63,21 +63,41 @@ public class Game {
             {
                 p = new Popup(100, 100, new ArrayList<>(), true, new ArrayList<>());
                 p.content.add(p.new Content(LatexParser.parseProblem(problem1, 40), true, 100, 100));
+                BufferedImage bg = new BufferedImage(p.content.get(0).content.getWidth(),p.content.get(0).content.getHeight(), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2d = bg.createGraphics();
+                g2d.setBackground(Color.WHITE);
+                g2d.clearRect(0,0,bg.getWidth(),bg.getHeight());
+                p.content.add(0, p.new Content(bg, true,100,100));
                 map[1][4] = new PopupTile("WORLD1_GRASSTILE02", false, p);
             }
             {
                 p = new Popup(100, 100, new ArrayList<>(), true, new ArrayList<>());
                 p.content.add(p.new Content(LatexParser.parseProblem(problem2, 40), true, 100, 100));
+                BufferedImage bg = new BufferedImage(p.content.get(0).content.getWidth(),p.content.get(0).content.getHeight(), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2d = bg.createGraphics();
+                g2d.setBackground(Color.WHITE);
+                g2d.clearRect(0,0,bg.getWidth(),bg.getHeight());
+                p.content.add(0, p.new Content(bg, true,100,100));
                 map[3][4] = new PopupTile("WORLD1_GRASSTILE02", false, p);
             }
             {
                 p = new Popup(100, 100, new ArrayList<>(), true, new ArrayList<>());
                 p.content.add(p.new Content(LatexParser.parseProblem(problem3, 40), true, 100, 100));
+                BufferedImage bg = new BufferedImage(p.content.get(0).content.getWidth(),p.content.get(0).content.getHeight(), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2d = bg.createGraphics();
+                g2d.setBackground(Color.WHITE);
+                g2d.clearRect(0,0,bg.getWidth(),bg.getHeight());
+                p.content.add(0, p.new Content(bg, true,100,100));
                 map[5][4] = new PopupTile("WORLD1_GRASSTILE02", false, p);
             }
             {
                 p = new Popup(100, 100, new ArrayList<>(), true, new ArrayList<>());
                 p.content.add(p.new Content(LatexParser.parseProblem(problem4, 40), true, 100, 100));
+                BufferedImage bg = new BufferedImage(p.content.get(0).content.getWidth(),p.content.get(0).content.getHeight(), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2d = bg.createGraphics();
+                g2d.setBackground(Color.WHITE);
+                g2d.clearRect(0,0,bg.getWidth(),bg.getHeight());
+                p.content.add(0, p.new Content(bg, true,100,100));
                 map[7][4] = new PopupTile("WORLD1_GRASSTILE02", false, p);
             }
         }
@@ -98,6 +118,7 @@ public class Game {
 
     public static void main (String[] args) {
         frame = new JFrame("World Test");
+        frame.getContentPane().setBackground(Color.BLACK);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setActiveWorld(9);
