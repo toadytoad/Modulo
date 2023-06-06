@@ -1,7 +1,9 @@
 package game;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CombinationLock extends Popup {
@@ -10,16 +12,24 @@ public class CombinationLock extends Popup {
     public static boolean isSolved;
     public CombinationLock(int solution) {
         super(800, 350,new ArrayList<>() ,true, new ArrayList<>());
-
-        BufferedImage bf = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
-        bf.getGraphics().drawRect(0,0,50,50);
-
+        try {
+            content.add(new Content(
+                    ImageIO.read(new File("src/main/java/assets/uielements/PadlockGUI.png")),
+                    true,
+                    0,0
+            ));
+        } catch (IOException e) {
+            System.out.println("Could not read file src/main/java/assets/uielements/PadlockGUI.png");
+            System.exit(-1);
+        }
+        super.x = (World.SCREEN_SIZE.x - content.get(0).content.getWidth())/2;
+        super.y = (World.SCREEN_SIZE.y - content.get(0).content.getHeight())/2;
 
         super.buttons.add(new Button(
-                bf, bf, bf,
-                this.x, this.y,
+                null,null,null,
+                this.x + 45,this.y + 210,
                 true,
-                new Rectangle(this.x, this.y, 50, 50)
+                new Rectangle(this.x+45, this.y + 210, 50, 50)
         ) {
             @Override
             public void onClicked() {
@@ -30,10 +40,10 @@ public class CombinationLock extends Popup {
         });
 
         super.buttons.add (new Button(
-                bf, bf, bf,
-                this.x, this.y + 100,
+                null,null,null,
+                this.x + 45, this.y + 360,
                 true,
-                new Rectangle(this.x, this.y + 100, 50, 50)
+                new Rectangle(this.x+45, this.y + 360, 50, 50)
         ) {
             @Override
             public void onClicked() {
@@ -44,10 +54,10 @@ public class CombinationLock extends Popup {
         });
 
         super.buttons.add (new Button(
-                bf, bf, bf,
-                this.x + 50, this.y,
+                null,null,null,
+                this.x + 105, this.y+210,
                 true,
-                new Rectangle(this.x + 50, this.y, 50, 50)
+                new Rectangle(this.x + 105, this.y+210, 50, 50)
         ) {
             @Override
             public void onClicked() {
@@ -58,10 +68,10 @@ public class CombinationLock extends Popup {
         });
 
         super.buttons.add (new Button(
-                bf, bf, bf,
-                this.x + 50, this.y + 100,
+                null,null,null,
+                this.x + 105, this.y + 360,
                 true,
-                new Rectangle(this.x + 50, this.y + 100, 50, 50)
+                new Rectangle(this.x + 105, this.y + 360, 50, 50)
         ) {
             @Override
             public void onClicked() {
@@ -72,10 +82,10 @@ public class CombinationLock extends Popup {
         });
 
         super.buttons.add (new Button(
-                bf, bf, bf,
-                this.x + 100, this.y,
+                null,null,null,
+                this.x + 165, this.y+210,
                 true,
-                new Rectangle(this.x + 100, this.y, 50, 50)
+                new Rectangle(this.x + 165, this.y+210, 50, 50)
         ) {
             @Override
             public void onClicked() {
@@ -86,10 +96,10 @@ public class CombinationLock extends Popup {
         });
 
         super.buttons.add (new Button(
-                bf, bf, bf,
-                this.x + 100, this.y + 100,
+                null,null,null,
+                this.x + 165, this.y + 360,
                 true,
-                new Rectangle(this.x + 100, this.y + 100, 50, 50)
+                new Rectangle(this.x + 165, this.y + 360, 50, 50)
         ) {
             @Override
             public void onClicked() {
@@ -100,10 +110,10 @@ public class CombinationLock extends Popup {
         });
 
         super.buttons.add (new Button(
-                bf, bf, bf,
-                this.x + 150, this.y,
+                null,null,null,
+                this.x + 225, this.y+210,
                 true,
-                new Rectangle(this.x + 150, this.y, 50, 50)
+                new Rectangle(this.x + 225, this.y+210, 50, 50)
         ) {
             @Override
             public void onClicked() {
@@ -114,10 +124,10 @@ public class CombinationLock extends Popup {
         });
 
         super.buttons.add (new Button(
-                bf, bf, bf,
-                this.x + 150, this.y + 100,
+                null,null,null,
+                this.x + 225, this.y + 360,
                 true,
-                new Rectangle(this.x + 150, this.y + 100, 50, 50)
+                new Rectangle(this.x + 225, this.y + 360, 50, 50)
         ) {
             @Override
             public void onClicked() {
@@ -136,8 +146,27 @@ public class CombinationLock extends Popup {
     public void paint(Graphics g) {
         super.paint(g);
         if (super.isVisible) {
-            g.setFont(new Font("Default", Font.PLAIN, 50));
-            g.drawString(String.format("%04d", guess), 800, 450);
+            Font font = new Font("Default", Font.PLAIN, 60);
+            g.setColor(Color.white);
+            drawCenteredString(g,Integer.toString( guess / 1000), new Rectangle(this.x +45, this.y + 270,50,80), font);
+            drawCenteredString(g,Integer.toString( guess % 1000 / 100), new Rectangle(this.x +105, this.y + 270,50,80), font);
+            drawCenteredString(g,Integer.toString( guess % 100 / 10), new Rectangle(this.x +165, this.y + 270,50,80), font);
+            drawCenteredString(g,Integer.toString( guess % 10), new Rectangle(this.x +225, this.y + 270,50,80), font);
         }
+    }
+
+    /**
+     * Draws a String centered in the middle of a Rectangle. Courtesy of StackOverflow.
+     *
+     * @param g The Graphics instance.
+     * @param text The String to draw.
+     * @param rect The Rectangle to center the text in.
+     */
+    public void drawCenteredString(Graphics g, String text, Rectangle rect, Font font) {
+        FontMetrics metrics = g.getFontMetrics(font);
+        int x = rect.x + (rect.width - metrics.stringWidth(text)) / 2;
+        int y = rect.y + ((rect.height - metrics.getHeight()) / 2) + metrics.getAscent();
+        g.setFont(font);
+        g.drawString(text, x, y);
     }
 }

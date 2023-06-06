@@ -40,17 +40,17 @@ public class Game {
                     null, null, null,
                     p.x, p.y,
                     true,
-                    new Rectangle(0, 0, 1920, 1080)
+                    new Rectangle(0, 0, World.SCREEN_SIZE.x, World.SCREEN_SIZE.y)
             ) {
                 @Override
                 public void onClicked() {
                     System.exit(0);
                 }
             });
-            BufferedImage endScreen = new BufferedImage(1920,1080, BufferedImage.TYPE_INT_RGB);
+            BufferedImage endScreen = new BufferedImage(World.SCREEN_SIZE.x, World.SCREEN_SIZE.y, BufferedImage.TYPE_INT_RGB);
             Graphics2D g2d = endScreen.createGraphics();
             g2d.setColor(Color.BLACK);
-            g2d.fillRect(0,0,1920,1080);
+            g2d.fillRect(0,0,World.SCREEN_SIZE.x, World.SCREEN_SIZE.y);
             g2d.setColor(Color.WHITE);
             g2d.setFont(new Font ("Brush Script MT", Font.PLAIN, 100));
             g2d.drawString("Thanks for playing",500,500);
@@ -62,42 +62,46 @@ public class Game {
         {
             {
                 p = new Popup(100, 100, new ArrayList<>(), true, new ArrayList<>());
-                p.content.add(p.new Content(LatexParser.parseProblem(problem1, 40), true, 100, 100));
+                p.content.add(p.new Content(LatexParser.parseProblem(problem1, 40), true, 0, 0));
                 BufferedImage bg = new BufferedImage(p.content.get(0).content.getWidth(),p.content.get(0).content.getHeight(), BufferedImage.TYPE_INT_ARGB);
                 Graphics2D g2d = bg.createGraphics();
                 g2d.setBackground(Color.WHITE);
                 g2d.clearRect(0,0,bg.getWidth(),bg.getHeight());
-                p.content.add(0, p.new Content(bg, true,100,100));
+                p.content.add(0, p.new Content(bg, true,0,0));
+                p.x = (World.SCREEN_SIZE.x - bg.getWidth())/2;
                 map[1][4] = new PopupTile("WORLD1_GRASSTILE02", false, p);
             }
             {
                 p = new Popup(100, 100, new ArrayList<>(), true, new ArrayList<>());
-                p.content.add(p.new Content(LatexParser.parseProblem(problem2, 40), true, 100, 100));
+                p.content.add(p.new Content(LatexParser.parseProblem(problem2, 40), true, 0, 0));
                 BufferedImage bg = new BufferedImage(p.content.get(0).content.getWidth(),p.content.get(0).content.getHeight(), BufferedImage.TYPE_INT_ARGB);
                 Graphics2D g2d = bg.createGraphics();
                 g2d.setBackground(Color.WHITE);
                 g2d.clearRect(0,0,bg.getWidth(),bg.getHeight());
-                p.content.add(0, p.new Content(bg, true,100,100));
+                p.content.add(0, p.new Content(bg, true,0,0));
+                p.x = (World.SCREEN_SIZE.x - bg.getWidth())/2;
                 map[3][4] = new PopupTile("WORLD1_GRASSTILE02", false, p);
             }
             {
                 p = new Popup(100, 100, new ArrayList<>(), true, new ArrayList<>());
-                p.content.add(p.new Content(LatexParser.parseProblem(problem3, 40), true, 100, 100));
+                p.content.add(p.new Content(LatexParser.parseProblem(problem3, 40), true, 0, 0));
                 BufferedImage bg = new BufferedImage(p.content.get(0).content.getWidth(),p.content.get(0).content.getHeight(), BufferedImage.TYPE_INT_ARGB);
                 Graphics2D g2d = bg.createGraphics();
                 g2d.setBackground(Color.WHITE);
                 g2d.clearRect(0,0,bg.getWidth(),bg.getHeight());
-                p.content.add(0, p.new Content(bg, true,100,100));
+                p.content.add(0, p.new Content(bg, true,0,0));
+                p.x = (World.SCREEN_SIZE.x - bg.getWidth())/2;
                 map[5][4] = new PopupTile("WORLD1_GRASSTILE02", false, p);
             }
             {
                 p = new Popup(100, 100, new ArrayList<>(), true, new ArrayList<>());
-                p.content.add(p.new Content(LatexParser.parseProblem(problem4, 40), true, 100, 100));
+                p.content.add(p.new Content(LatexParser.parseProblem(problem4, 40), true, 0, 0));
                 BufferedImage bg = new BufferedImage(p.content.get(0).content.getWidth(),p.content.get(0).content.getHeight(), BufferedImage.TYPE_INT_ARGB);
                 Graphics2D g2d = bg.createGraphics();
                 g2d.setBackground(Color.WHITE);
                 g2d.clearRect(0,0,bg.getWidth(),bg.getHeight());
-                p.content.add(0, p.new Content(bg, true,100,100));
+                p.content.add(0, p.new Content(bg, true,0,0));
+                p.x = (World.SCREEN_SIZE.x - bg.getWidth())/2;
                 map[7][4] = new PopupTile("WORLD1_GRASSTILE02", false, p);
             }
         }
