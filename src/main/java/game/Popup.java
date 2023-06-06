@@ -76,6 +76,7 @@ public class Popup implements MouseListener, MouseMotionListener {
 
     public void paint(Graphics g) {
         if(this.isVisible) {
+
             for(Content c : content) {
                 if(c.isVisible) {
                     g.drawImage(c.content, this.x+c.x, this.y+c.y, null);

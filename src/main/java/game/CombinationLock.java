@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class CombinationLock extends Popup {
@@ -8,9 +9,14 @@ public class CombinationLock extends Popup {
     int guess;
     public static boolean isSolved;
     public CombinationLock(int solution) {
-        super(800, 350,new ArrayList<>() ,false, new ArrayList<>());
+        super(800, 350,new ArrayList<>() ,true, new ArrayList<>());
+
+        BufferedImage bf = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
+        bf.getGraphics().drawRect(0,0,50,50);
+
+
         super.buttons.add(new Button(
-                null, null, null,
+                bf, bf, bf,
                 this.x, this.y,
                 true,
                 new Rectangle(this.x, this.y, 50, 50)
@@ -24,7 +30,7 @@ public class CombinationLock extends Popup {
         });
 
         super.buttons.add (new Button(
-                null, null, null,
+                bf, bf, bf,
                 this.x, this.y + 100,
                 true,
                 new Rectangle(this.x, this.y + 100, 50, 50)
@@ -38,7 +44,7 @@ public class CombinationLock extends Popup {
         });
 
         super.buttons.add (new Button(
-                null, null, null,
+                bf, bf, bf,
                 this.x + 50, this.y,
                 true,
                 new Rectangle(this.x + 50, this.y, 50, 50)
@@ -52,7 +58,7 @@ public class CombinationLock extends Popup {
         });
 
         super.buttons.add (new Button(
-                null, null, null,
+                bf, bf, bf,
                 this.x + 50, this.y + 100,
                 true,
                 new Rectangle(this.x + 50, this.y + 100, 50, 50)
@@ -66,7 +72,7 @@ public class CombinationLock extends Popup {
         });
 
         super.buttons.add (new Button(
-                null, null, null,
+                bf, bf, bf,
                 this.x + 100, this.y,
                 true,
                 new Rectangle(this.x + 100, this.y, 50, 50)
@@ -80,7 +86,7 @@ public class CombinationLock extends Popup {
         });
 
         super.buttons.add (new Button(
-                null, null, null,
+                bf, bf, bf,
                 this.x + 100, this.y + 100,
                 true,
                 new Rectangle(this.x + 100, this.y + 100, 50, 50)
@@ -94,7 +100,7 @@ public class CombinationLock extends Popup {
         });
 
         super.buttons.add (new Button(
-                null, null, null,
+                bf, bf, bf,
                 this.x + 150, this.y,
                 true,
                 new Rectangle(this.x + 150, this.y, 50, 50)
@@ -108,7 +114,7 @@ public class CombinationLock extends Popup {
         });
 
         super.buttons.add (new Button(
-                null, null, null,
+                bf, bf, bf,
                 this.x + 150, this.y + 100,
                 true,
                 new Rectangle(this.x + 150, this.y + 100, 50, 50)
@@ -121,6 +127,7 @@ public class CombinationLock extends Popup {
             }
         });
         this.solution = solution;
+        System.out.println(solution);
     }
 
     private void check () {isSolved = guess == solution;}
@@ -128,6 +135,9 @@ public class CombinationLock extends Popup {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawString(Integer.toString(guess), 800, 400);
+        if (super.isVisible) {
+            g.setFont(new Font("Default", Font.PLAIN, 50));
+            g.drawString(String.format("%04d", guess), 800, 450);
+        }
     }
 }

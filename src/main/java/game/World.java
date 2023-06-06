@@ -20,7 +20,7 @@ import java.util.List;
 public class World extends JComponent implements KeyListener {
     private final Tile[][] map;
     private final java.util.List<Decoration> decorationLayer;
-    private static final java.util.List<Popup> popupLayer = new ArrayList<>();
+    private static java.util.List<Popup> popupLayer = new ArrayList<>();
     Player player = new Player(0, 0);
     private Coordinate screenOffset;
     private final Coordinate tilesOnScreen;
@@ -79,16 +79,22 @@ public class World extends JComponent implements KeyListener {
         player.setMovement(x, y);
 
         Coordinate movingTo = player.movingTo();
-        if (movingTo.x < map.length && movingTo.x >= 0 && movingTo.y < map[0].length && movingTo.y >= 0) {
+        if (movingTo.x < map.length && movingTo.x >= 0 && movingTo.y < map[0].length && movingTo.y >= 0 && (player.getMovement().x != 0 || player.getMovement().y != 0)) {
             if (map[movingTo.x][movingTo.y] instanceof Door) {
                 player.setMovement(0, 0);
-//                player.coordinate = new Coordinate(0, 0);
                 map[movingTo.x][movingTo.y].interact();
             }
             else if (map[movingTo.x][movingTo.y].getWalkable()
                     && map[movingTo.x][player.coordinate.y].getWalkable()
                     && map[player.coordinate.x][movingTo.y].getWalkable()) {
                 player.move();
+                for (Popup popup : popupLayer) {
+                    popup.isVisible = false;
+                }
+            }
+
+            if (map[movingTo.x][movingTo.y] instanceof PopupTile) {
+                addPopup(((PopupTile) map[movingTo.x][movingTo.y]).popup);
             }
         }
         Coordinate playerCoordinatesOnScreen = new Coordinate(player.coordinate.x - screenOffset.x, player.coordinate.y - screenOffset.y);
@@ -104,26 +110,25 @@ public class World extends JComponent implements KeyListener {
         if (playerCoordinatesOnScreen.y >= tilesOnScreen.y - 3 && screenOffset.y < map[0].length - tilesOnScreen.y) {
             screenOffset = new Coordinate(screenOffset.x, screenOffset.y + 1);
         }
-        /*
-        TODO: fine tune numbers in if statement
-         */
         player.paint(g, screenOffset);
-//        System.out.print(screenOffset + "\t" + player.coordinate + "\n");
         for (Popup popup : popupLayer) {
             popup.paint(g);
         }
     }
 
     public static void addPopup (Popup popup) {
+        if (popup == null) return;
         popupLayer.add(popup);
-        Game.frame.addMouseMotionListener(popup);
-        Game.frame.addMouseListener(popup);
+        if (!Arrays.asList(Game.frame.getContentPane().getMouseMotionListeners()).contains(popup)) Game.frame.getContentPane().addMouseMotionListener(popup);
+        if (!Arrays.asList(Game.frame.getContentPane().getMouseListeners()).contains(popup))Game.frame.getContentPane().addMouseListener(popup);
+        popup.isVisible = true;
     }
 
     public static void removePopup (Popup popup) {
         popupLayer.remove(popup);
         Game.frame.removeMouseMotionListener(popup);
         Game.frame.removeMouseListener(popup);
+        popup.isVisible = false;
     }
 
     @Override

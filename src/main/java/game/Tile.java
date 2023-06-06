@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public class Tile {
     private Image sprite;
-    private final boolean isWalkable;
+    private boolean isWalkable;
     private final static HashMap<String, Image> tileSprites;
 
     static {
@@ -49,6 +49,7 @@ public class Tile {
     public void setImage(String tileImage){
         this.sprite = tileSprites.get(tileImage);
     }
+    public void setWalkable(boolean isWalkable) {this.isWalkable = isWalkable;}
     public boolean getWalkable() {return isWalkable;}
 
     public void paint (Graphics g, Coordinate coordinate) {
