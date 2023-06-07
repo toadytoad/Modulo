@@ -137,7 +137,6 @@ public class CombinationLock extends Popup {
             }
         });
         this.solution = solution;
-        System.out.println(solution);
     }
 
     private void check () {isSolved = guess == solution;}

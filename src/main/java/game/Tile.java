@@ -52,10 +52,6 @@ public class Tile {
     public void setWalkable(boolean isWalkable) {this.isWalkable = isWalkable;}
     public boolean getWalkable() {return isWalkable;}
 
-    public void paint (Graphics g, Coordinate coordinate) {
-        g.drawImage(sprite, coordinate.x, coordinate.y, null);
-    }
-
     public void paint (Graphics g, int x, int y, Coordinate screenOffset) {
         g.drawImage(sprite, (x-screenOffset.x)*World.TILE_LENGTH, (y-screenOffset.y)*World.TILE_LENGTH, World.TILE_LENGTH, World.TILE_LENGTH, null);
     }

@@ -18,9 +18,9 @@ import java.util.List;
  */
 
 public class World extends JComponent implements KeyListener {
-    private final Tile[][] map;
+    final Tile[][] map;
     private final java.util.List<Decoration> decorationLayer;
-    private static java.util.List<Popup> popupLayer = new ArrayList<>();
+    static java.util.List<Popup> popupLayer = new ArrayList<>();
     Player player = new Player(0, 0);
     private Coordinate screenOffset;
     private final Coordinate tilesOnScreen;

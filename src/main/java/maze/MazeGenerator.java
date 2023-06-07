@@ -79,7 +79,6 @@ public class MazeGenerator {
         openSet.add(nodes.get(start));
         while(!openSet.isEmpty()){
             int current = openSet.poll().pos;
-            System.out.println(current);
             if(current==goal){
                 System.out.println("FOUND PATH!");
                 return reconstructPath(cameFrom, current);

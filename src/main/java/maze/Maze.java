@@ -6,7 +6,7 @@ import game.Tile;
 import java.util.LinkedList;
 
 public class Maze {
-    MazeTile[][] maze;
+    public MazeTile[][] maze;
     LinkedList<Coordinate> path;
     public static Maze getBlankMaze(){
         Maze m = new Maze();
