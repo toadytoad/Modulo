@@ -2,7 +2,6 @@ package game;
 
 import maze.Maze;
 import maze.MazeGenerator;
-import maze.MazeTile;
 import problem.LatexParser;
 import problem.Problem;
 import problem.ProblemFactory;
@@ -23,14 +22,15 @@ public class Game {
         worlds[1] = World.generateRandomWorldWithDoors(new Coordinate(10, 10), 2);
         worlds[2] = World.generateWorldFromFile("src/main/java/game/testWorld.lvl");
         worlds[3] = World.generateWorldFromFile("src/main/java/game/World1.lvl");
+        worlds[4] = World.generateRandomWorld(new Coordinate(40, 80));
         Tile[][] map = new Tile[9][7];
         {
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 2; j++) {
-                    map[i][j] = new Tile("WORLD1_GRASSTILE01", false);
+                    map[i][j] = new Tile("BLACK", false);
                 }
                 for (int j = 2; j < 7; j++) {
-                    map[i][j] = new Tile("WORLD1_PATHTILE_FULLPATH", true);
+                    map[i][j] = new Tile("WORLD2_MAZETILE", true);
                 }
             }
             Problem problem1 = ProblemFactory.getLinearEquation(0, 9, "a", (int) (Math.random() * 10));
@@ -57,13 +57,11 @@ public class Game {
                 g2d.setColor(Color.BLACK);
                 g2d.fillRect(0, 0, World.SCREEN_SIZE.x, World.SCREEN_SIZE.y);
                 g2d.setColor(Color.WHITE);
-                g2d.setFont(new Font("Brush Script MT", Font.PLAIN, 100));
-                g2d.drawString("Thanks for playing", 500, 500);
-                g2d.setFont(new Font("Default", Font.PLAIN, 50));
-                g2d.drawString("Click anywhere to exit", 600, 600);
+                CombinationLock.drawCenteredString(g2d, "Thanks for playing", new Rectangle(0,World.SCREEN_SIZE.y/4, World.SCREEN_SIZE.x, World.SCREEN_SIZE.y/4), new Font("Brush Script MT", Font.PLAIN, 150));
+                CombinationLock.drawCenteredString(g2d, "Click anywhere to exit", new Rectangle(0,World.SCREEN_SIZE.y/2, World.SCREEN_SIZE.x, World.SCREEN_SIZE.y/2), new Font("Default", Font.PLAIN, 50));
                 p.content.add(p.new Content(endScreen, true, 0, 0));
             }
-            map[4][0] = new PopupTile("WORLD1_PATHTILE_FULLPATH", true, p);
+            map[4][0] = new PopupTile("WORLD2_MAZETILE", true, p);
 
             {
                 {
@@ -132,10 +130,10 @@ public class Game {
             }
         }
         for (int i = 0; i < map.length; i++) {
-            if (i != 4) map[i][29] = new Tile("TEXTURENOTFOUND_ERRORTILE02", false);
+            if (i != 4) map[i][29] = new Tile("BLACK", false);
         }
         map[4][0] = new Door("WORLD1_PATHTILE_FULLPATH", 9);
-        worlds[8] = new MazeWorld(map, new Coordinate(4,31), maze);
+        worlds[8] = new MazeWorld(map, new Coordinate(4,31));
     }
 
 
@@ -155,7 +153,7 @@ public class Game {
         frame.getContentPane().setBackground(Color.BLACK);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setActiveWorld(3);
+        setActiveWorld(8);
         frame.setVisible(true);
         Timer timer = new Timer(100, e -> frame.getContentPane().repaint());
         timer.start();

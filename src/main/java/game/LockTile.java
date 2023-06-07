@@ -13,6 +13,7 @@ public class LockTile extends PopupTile {
         if (CombinationLock.isSolved) {
             setWalkable(true);
             World.removePopup(this.popup);
+            setImage("WORLD1_PATHTILE_FULLPATH");
             this.popup = new Popup(0,0,new ArrayList<>(),false,new ArrayList<>());
         }
     }

@@ -11,17 +11,17 @@ public class MazeTile extends Tile {
     public int x, y;
     public boolean isSafe = true;
     public MazeTile(Tile next, int x, int y){
-        super("WORLD1_PATHTILE_FULLPATH", true);
+        super("WORLD2_MAZETILE", true);
         this.x=x;
         this.y=y;
         this.next = next;
     }
     public void burn(){
-        super.setImage("TEXTURENOTFOUND_ERRORTILE");
+        super.setImage("WORLD2_MAZETILE_LIT");
         isSafe = false;
     }
     public void extinguish(){
-        super.setImage("WORLD1_PATHTILE_FULLPATH");
+        super.setImage("WORLD2_MAZETILE");
         isSafe = true;
     }
 

@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 /**
@@ -34,8 +35,18 @@ public class Tile {
         tileSprites.put("WORLD1_PATHTILE_TOPLEFTWIDECORNER", Toolkit.getDefaultToolkit().getImage("src/main/java/assets/world1/PathTile_TopLeftWideCorner.png"));
         tileSprites.put("WORLD1_PATHTILE_TOPRIGHTSMALLCORNER", Toolkit.getDefaultToolkit().getImage("src/main/java/assets/world1/PathTile_TopRightSmallCorner.png"));
         tileSprites.put("WORLD1_PATHTILE_TOPRIGHTWIDECORNER", Toolkit.getDefaultToolkit().getImage("src/main/java/assets/world1/PathTile_TopRightWideCorner.png"));
+        tileSprites.put("WORLD2_MAZETILE", Toolkit.getDefaultToolkit().getImage("src/main/java/assets/world2/MazeTile.png"));
+        tileSprites.put("WORLD2_MAZETILE_LIT", Toolkit.getDefaultToolkit().getImage("src/main/java/assets/world2/MazeTile_Fire.png"));
         tileSprites.put("TEXTURENOTFOUND_ERRORTILE", Toolkit.getDefaultToolkit().getImage("src/main/java/assets/TextureNotFound_ErrorTile.png"));
         tileSprites.put("TEXTURENOTFOUND_ERRORTILE02", Toolkit.getDefaultToolkit().getImage("src/main/java/assets/TextureNotFound_ErrorTile02.png"));
+        {
+            BufferedImage black = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2d = black.createGraphics();
+            g2d.setBackground(Color.black);
+            g2d.clearRect(0, 0, black.getWidth(), black.getHeight());
+            tileSprites.put("BLACK", black);
+        }
+
     }
 
     public Tile (String tileImage, boolean isWalkable) {

@@ -1,6 +1,5 @@
 package game;
 
-import maze.Maze;
 import maze.MazeTile;
 import problem.LatexParser;
 import problem.Problem;
@@ -12,15 +11,13 @@ import java.util.ArrayList;
 import javax.swing.Timer;
 
 public class MazeWorld extends World {
-    private Maze maze;
     private int counter;
     private Timer timer = new Timer(100, e -> counter += 1);
     private boolean mazeActive;
-    public final static int TIME_PER_QUESTION = 30;
+    public final static int TIME_PER_QUESTION = 200;
     private MazeTile current;
-    public MazeWorld(Tile[][] map, Coordinate playerCoordinates, Maze maze) {
+    public MazeWorld(Tile[][] map, Coordinate playerCoordinates) {
         super(map, new ArrayList<>(), playerCoordinates);
-        this.maze = maze;
     }
 
     @Override
@@ -87,7 +84,7 @@ public class MazeWorld extends World {
 
     private void generateNextPopup(MazeTile mazeTile) {
         if (mazeTile.next instanceof MazeTile) {
-            Problem p = ProblemFactory.getSystem(0,5,((MazeTile) mazeTile.next).x, ((MazeTile) mazeTile.next).y);
+            Problem p = ProblemFactory.getSystem(0,2,((MazeTile) mazeTile.next).x, ((MazeTile) mazeTile.next).y);
             Popup popup = new Popup(100, 500,
                     new ArrayList<>(),
                     true,new ArrayList<>());

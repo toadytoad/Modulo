@@ -54,6 +54,11 @@ public class World extends JComponent implements KeyListener {
         this.player.coordinate = playerCoordinates;
     }
 
+    public World (Tile[][] map, List<Decoration> decorationLayer, Coordinate playerCoordinates, Coordinate defaultScreenOffset) {
+        this(map, decorationLayer, playerCoordinates);
+        this.screenOffset = defaultScreenOffset;
+    }
+
     public void paint (Graphics g) {
         for (int i = Math.max(0, screenOffset.x); i < tilesOnScreen.x + screenOffset.x && i < map.length; i++) {
             for (int j = Math.max(0, screenOffset.y); j < tilesOnScreen.y + screenOffset.y && j < map[0].length; j++) {
