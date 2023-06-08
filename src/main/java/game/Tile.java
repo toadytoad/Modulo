@@ -46,6 +46,7 @@ public class Tile {
             g2d.clearRect(0, 0, black.getWidth(), black.getHeight());
             tileSprites.put("BLACK", black);
         }
+        tileSprites.put("EMPTY", null);
 
     }
 

@@ -131,9 +131,17 @@ public class Game {
         }
         for (int i = 0; i < map.length; i++) {
             if (i != 4) map[i][29] = new Tile("BLACK", false);
+            if (i != 4) map[i][30] = new Tile("BLACK", false);
         }
         map[4][0] = new Door("WORLD1_PATHTILE_FULLPATH", 9);
-        worlds[8] = new MazeWorld(map, new Coordinate(4,31));
+        java.util.List<Decoration> decorationLayer = new ArrayList<>();
+        decorationLayer.add(new Decoration("X_AXIS_BAR", new Coordinate(0, 29)));
+        decorationLayer.add(new Decoration("Y_AXIS_BAR_20_24", new Coordinate(9, 24)));
+        decorationLayer.add(new Decoration("Y_AXIS_BAR_15_19", new Coordinate(9, 19)));
+        decorationLayer.add(new Decoration("Y_AXIS_BAR_10_14", new Coordinate(9, 14)));
+        decorationLayer.add(new Decoration("Y_AXIS_BAR_5_9", new Coordinate(9, 9)));
+        decorationLayer.add(new Decoration("Y_AXIS_BAR_0_4", new Coordinate(9, 4)));
+        worlds[8] = new MazeWorld(map, decorationLayer, new Coordinate(4,31));
     }
 
 
@@ -153,7 +161,7 @@ public class Game {
         frame.getContentPane().setBackground(Color.BLACK);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setActiveWorld(8);
+        setActiveWorld(9);
         frame.setVisible(true);
         Timer timer = new Timer(100, e -> frame.getContentPane().repaint());
         timer.start();

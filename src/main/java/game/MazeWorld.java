@@ -16,8 +16,8 @@ public class MazeWorld extends World {
     private boolean mazeActive;
     public final static int TIME_PER_QUESTION = 200;
     private MazeTile current;
-    public MazeWorld(Tile[][] map, Coordinate playerCoordinates) {
-        super(map, new ArrayList<>(), playerCoordinates);
+    public MazeWorld(Tile[][] map, java.util.List<Decoration> decorationList, Coordinate playerCoordinates) {
+        super(map, decorationList, playerCoordinates);
     }
 
     @Override

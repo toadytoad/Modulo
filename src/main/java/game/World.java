@@ -23,9 +23,9 @@ public class World extends JComponent implements KeyListener {
     static java.util.List<Popup> popupLayer = new ArrayList<>();
     Player player = new Player(0, 0);
     private Coordinate screenOffset;
-    private final Coordinate tilesOnScreen;
     public final static int TILE_LENGTH = 60;
     public final static Coordinate SCREEN_SIZE = new Coordinate(Toolkit.getDefaultToolkit().getScreenSize());
+    private final static Coordinate tilesOnScreen = new Coordinate(SCREEN_SIZE.x / TILE_LENGTH, SCREEN_SIZE.y / TILE_LENGTH - 1);;
     public static HashMap<Character, Boolean> keysPressed;
 
     static {
@@ -40,7 +40,6 @@ public class World extends JComponent implements KeyListener {
         screenOffset = new Coordinate(0, 0);
         this.map = map;
         this.decorationLayer = decorationLayer;
-        tilesOnScreen = new Coordinate(SCREEN_SIZE.x / TILE_LENGTH, SCREEN_SIZE.y / TILE_LENGTH - 1);
         if (map.length < tilesOnScreen.x) {
             screenOffset = new Coordinate(Math.abs(tilesOnScreen.x - map.length) / -2, 0);
         }
@@ -67,8 +66,8 @@ public class World extends JComponent implements KeyListener {
         }
 
         for (Decoration decoration : decorationLayer) {
-            if (decoration.coordinate.x + decoration.decorationImage.size.x > screenOffset.x
-                    && decoration.coordinate.y + decoration.decorationImage.size.y > screenOffset.y
+            if (decoration.coordinate.x + decoration.decorationImage.size.x > screenOffset.x - tilesOnScreen.x
+                    && decoration.coordinate.y + decoration.decorationImage.size.y > screenOffset.y - tilesOnScreen.y
                     && decoration.coordinate.x < screenOffset.x + tilesOnScreen.x
                     && decoration.coordinate.y < screenOffset.y + tilesOnScreen.y) {
                 decoration.paint(g, screenOffset);
@@ -197,7 +196,7 @@ public class World extends JComponent implements KeyListener {
                     String token;
                     switch (token = st.nextToken()) {
                         case "DOOR":
-                            map[i][j] = new Door("TEXTURENOTFOUND_ERRORTILE", Integer.parseInt(token));
+                            map[i][j] = new Door("TEXTURENOTFOUND_ERRORTILE", Integer.parseInt(st.nextToken()));
                             break;
                         default:
                             map[i][j] = new Tile(token, Boolean.parseBoolean(st.nextToken()));
