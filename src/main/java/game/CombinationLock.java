@@ -6,20 +6,31 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Extension of the Popup class to create the combination lock used in the
+ * escape room. Uses Buttons to provide functionality.
+ *
+ * @author Luke Mathieu
+ */
 public class CombinationLock extends Popup {
     final int solution;
     int guess;
     public static boolean isSolved;
+
+    /**
+     * Class constructor.
+     * @param solution The solution to the combination lock. Should fall between 0-9999 (inclusive)
+     */
     public CombinationLock(int solution) {
         super(800, 350,new ArrayList<>() ,true, new ArrayList<>());
         try {
             content.add(new Content(
-                    ImageIO.read(new File("src/main/java/assets/uielements/PadlockGUI.png")),
+                    ImageIO.read(new File("assets/uielements/PadlockGUI.png")),
                     true,
                     0,0
             ));
         } catch (IOException e) {
-            System.out.println("Could not read file src/main/java/assets/uielements/PadlockGUI.png");
+            System.out.println("Could not read file assets/uielements/PadlockGUI.png");
         }
         super.x = (World.SCREEN_SIZE.x - content.get(0).content.getWidth(null))/2;
         super.y = (World.SCREEN_SIZE.y - content.get(0).content.getHeight(null))/2;
@@ -138,8 +149,16 @@ public class CombinationLock extends Popup {
         this.solution = solution;
     }
 
+    /**
+     * Compares the current guess to the solution, and updates the isSolved variable.
+     */
     private void check () {isSolved = guess == solution;}
 
+    /**
+     * Overrides the default paint method to display the digits of the current guess
+     * on top of the lock image.
+     * @param g The Graphics object to be painted on.
+     */
     @Override
     public void paint(Graphics g) {
         super.paint(g);

@@ -7,12 +7,27 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
+/**
+ * Popups are painted on top of all other screen elements, and are capable of
+ * user interaction through the Button inner class.
+ *
+ * @author Tom Philip
+ */
 public class Popup implements MouseListener, MouseMotionListener {
     int x,y;
     List<Button> buttons;
     boolean isVisible;
     List<Content> content;
 
+    /**
+     * Constructs a Popup with the specified content, at the specified coordinates, with
+     * the specified visibility.
+     * @param x The x-coordinate the Popup should be drawn at.
+     * @param y The y-coordinate the Popup should be drawn at
+     * @param buttons The list of Buttons in this Popup
+     * @param isVisible Whether this Popup is visible.
+     * @param content The list of Content in this Popup.
+     */
     public Popup(int x, int y, List<Button> buttons, boolean isVisible, List<Content> content) {
         this.x = x;
         this.y = y;
@@ -74,6 +89,10 @@ public class Popup implements MouseListener, MouseMotionListener {
         }
     }
 
+    /**
+     * Paints all the Content and Buttons in this Popup
+     * @param g The Graphics context to be painted on.
+     */
     public void paint(Graphics g) {
         if(this.isVisible) {
 
@@ -89,6 +108,10 @@ public class Popup implements MouseListener, MouseMotionListener {
             }
         }
     }
+
+    /**
+     * Internal class to represent Content that a Popup can display.
+     */
     public class Content{
         Image content;
         boolean isVisible;
@@ -100,6 +123,12 @@ public class Popup implements MouseListener, MouseMotionListener {
             this.y=y;
         }
     }
+
+    /**
+     * Internal class to represent Buttons within a Popup. Supports multiple
+     * images that are swapped when the user hovers or clicks on the button.
+     * Behaviours can be attached to a Button by overriding the onClicked() method.
+     */
     public class Button {
         private final Image def;
         private final Image hovering;

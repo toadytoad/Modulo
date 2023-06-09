@@ -2,21 +2,35 @@ package problem;
 import org.scilab.forge.jlatexmath.TeXConstants;
 import org.scilab.forge.jlatexmath.TeXFormula;
 import org.scilab.forge.jlatexmath.TeXIcon;
-import org.scilab.forge.jlatexmath.TeXParser;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.ArrayList;
 
+/**
+ * Parses a Latex String or a Problem into a BufferedImage. Latex-parsing library provided courtesy of Kurt Vermeulen.
+ *
+ * @author Tom Philip
+ */
 public class LatexParser {
+    /**
+     * Parses a Problem's problem text into a BufferedImage.
+     * @param p The Problem to be parsed.
+     * @param f The font size of the created BufferedImage.
+     * @return A BufferedImage with the Problem rendered onto it.
+     */
     public static BufferedImage parseProblem(Problem p, int f){
         return parseProblem(p.getProblem(), f);
     }
+
+    /**
+     * Parses a Latex into a BufferedImage.
+     * @param s The Latex String to be parsed.
+     * @param f The font size of the created BufferedImage.
+     * @return A BufferedImage with the Latex String rendered onto it.
+     */
     public static BufferedImage parseProblem(String s, int f) {
         TeXFormula tf = new TeXFormula(s);
 
@@ -30,7 +44,7 @@ public class LatexParser {
         File out = new File("./out.png");
         try {
             ImageIO.write(bimg, "png", out);
-        } catch(Exception e){}
+        } catch(Exception ignored){}
         return bimg;
     }
 

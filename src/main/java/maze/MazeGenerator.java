@@ -1,13 +1,21 @@
 package maze;
 
-import game.Tile;
-
 import java.util.*;
 
+/**
+ * Generates a Maze object using the A* algorithm.
+ *
+ * @author Tom Philip
+ */
 public class MazeGenerator {
     static List<List<CostPair>> adj;
     static Map<Integer, Integer> fScore;
     static List<Node> nodes;
+
+    /**
+     * Generates a Maze.
+     * @return A Maze object, with MazeTiles that point to other MazeTiles, forming a path through the maze.
+     */
     public static Maze getMaze(){
         Maze m = Maze.getBlankMaze();
         Random r = new Random();
@@ -80,7 +88,6 @@ public class MazeGenerator {
         while(!openSet.isEmpty()){
             int current = openSet.poll().pos;
             if(current==goal){
-                System.out.println("FOUND PATH!");
                 return reconstructPath(cameFrom, current);
             }
             for(CostPair neighbour : adj.get(current)){

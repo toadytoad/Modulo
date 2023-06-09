@@ -3,9 +3,9 @@ package game;
 import java.awt.*;
 
 /**
- * <h1>Coordinate</h1>
+ * Data class to store a single x-y coordinate pair, or any other pair of data.
  *
- * Data class to store a single x-y coordinate pair
+ * @author Luke Mathieu
  */
 
 public class Coordinate {

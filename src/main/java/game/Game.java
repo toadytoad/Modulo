@@ -14,11 +14,22 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
+/**
+ * Driver class. Initializes all the Worlds into a World array, creates a
+ * JFrame, and controls which world is currently active.
+ *
+ * @author Luke Mathieu
+ */
+
 public class Game {
     static JFrame frame;
     static final World[] worlds;
     static int currentWorld = 0;
 
+    /*
+        Initializes all the Worlds in the game into the worlds array.
+     */
     static {
         worlds = new World[10];
         Tile[][] map = new Tile[16][10];
@@ -72,7 +83,7 @@ public class Game {
                 decorationLayer.add(new Decoration("SCHOOL_TEACHER_1", new Coordinate(5, 2)));
                 Popup popup = null;
                 try {
-                    BufferedImage bf = ImageIO.read(new File("src/main/java/assets/uielements/AdditionLesson.png"));
+                    BufferedImage bf = ImageIO.read(new File("assets/uielements/AdditionLesson.png"));
                     popup = new Popup(
                             (World.SCREEN_SIZE.x - bf.getWidth()) / 2,
                             (World.SCREEN_SIZE.y - bf.getHeight()) / 2,
@@ -81,12 +92,12 @@ public class Game {
                             new ArrayList<>());
                     popup.content.add(popup.new Content(bf, true, 0, 0));
                 } catch (IOException e) {
-                    System.out.println("Could not read file src/main/java/assets/uielements/AdditionLesson.png");
+                    System.out.println("Could not read file assets/uielements/AdditionLesson.png");
                 }
                 map[5][3] = new PopupTile("EMPTY", false, popup);
                 decorationLayer.add(new Decoration("SCHOOL_TEACHER_1", new Coordinate(9, 3)));
                 try {
-                    BufferedImage bf = ImageIO.read(new File("src/main/java/assets/uielements/SubtractionLesson.png"));
+                    BufferedImage bf = ImageIO.read(new File("assets/uielements/SubtractionLesson.png"));
                     popup = new Popup(
                             (World.SCREEN_SIZE.x - bf.getWidth()) / 2,
                             (World.SCREEN_SIZE.y - bf.getHeight()) / 2,
@@ -95,7 +106,7 @@ public class Game {
                             new ArrayList<>());
                     popup.content.add(popup.new Content(bf, true, 0, 0));
                 } catch (IOException e) {
-                    System.out.println("Could not read file src/main/java/assets/uielements/SubtractionLesson.png");
+                    System.out.println("Could not read file assets/uielements/SubtractionLesson.png");
                 }
                 map[9][4] = new PopupTile("EMPTY", false, popup);
             }
@@ -108,7 +119,7 @@ public class Game {
                 decorationLayer.add(new Decoration("SCHOOL_TEACHER_1", new Coordinate(9, 4)));
                 Popup popup = null;
                 try {
-                    BufferedImage bf = ImageIO.read(new File("src/main/java/assets/uielements/MultiplicationLesson.png"));
+                    BufferedImage bf = ImageIO.read(new File("assets/uielements/MultiplicationLesson.png"));
                     popup = new Popup(
                             (World.SCREEN_SIZE.x - bf.getWidth()) / 2,
                             (World.SCREEN_SIZE.y - bf.getHeight()) / 2,
@@ -117,7 +128,7 @@ public class Game {
                             new ArrayList<>());
                     popup.content.add(popup.new Content(bf, true, 0, 0));
                 } catch (IOException e) {
-                    System.out.println("Could not read file src/main/java/assets/uielements/MultiplicationLesson.png");
+                    System.out.println("Could not read file assets/uielements/MultiplicationLesson.png");
                 }
                 map[9][5] = new PopupTile("EMPTY", false, popup);
                 map[9][4] = map[9][5];
@@ -131,7 +142,7 @@ public class Game {
                 decorationLayer.add(new Decoration("SCHOOL_TEACHER_1", new Coordinate(8, 6)));
                 Popup popup = null;
                 try {
-                    BufferedImage bf = ImageIO.read(new File("src/main/java/assets/uielements/DivisionLesson.png"));
+                    BufferedImage bf = ImageIO.read(new File("assets/uielements/DivisionLesson.png"));
                     popup = new Popup(
                             (World.SCREEN_SIZE.x - bf.getWidth()) / 2,
                             (World.SCREEN_SIZE.y - bf.getHeight()) / 2,
@@ -140,7 +151,7 @@ public class Game {
                             new ArrayList<>());
                     popup.content.add(popup.new Content(bf, true, 0, 0));
                 } catch (IOException e) {
-                    System.out.println("Could not read file src/main/java/assets/uielements/DivisionLesson.png");
+                    System.out.println("Could not read file assets/uielements/DivisionLesson.png");
                 }
                 map[8][6] = new PopupTile("EMPTY", false, popup);
                 map[8][7] = map[8][6];
@@ -154,7 +165,7 @@ public class Game {
                 decorationLayer.add(new Decoration("SCHOOL_TEACHER_1", new Coordinate(2, 3)));
                 Popup popup = null;
                 try {
-                    BufferedImage bf = ImageIO.read(new File("src/main/java/assets/uielements/VariablesLesson.png"));
+                    BufferedImage bf = ImageIO.read(new File("assets/uielements/VariablesLesson.png"));
                     popup = new Popup(
                             (World.SCREEN_SIZE.x - bf.getWidth()) / 2,
                             (World.SCREEN_SIZE.y - bf.getHeight()) / 2,
@@ -163,7 +174,7 @@ public class Game {
                             new ArrayList<>());
                     popup.content.add(popup.new Content(bf, true, 0, 0));
                 } catch (IOException e) {
-                    System.out.println("Could not read file src/main/java/assets/uielements/VariablesLesson.png");
+                    System.out.println("Could not read file assets/uielements/VariablesLesson.png");
                 }
                 map[2][4] = new PopupTile("EMPTY", false, popup);
                 map[2][8] = new Door("EMPTY", 2);
@@ -177,7 +188,7 @@ public class Game {
                 decorationLayer.add(new Decoration("SCHOOL_TEACHER_1", new Coordinate(8, 5)));
                 Popup popup = null;
                 try {
-                    BufferedImage bf = ImageIO.read(new File("src/main/java/assets/uielements/SystemsLesson.png"));
+                    BufferedImage bf = ImageIO.read(new File("assets/uielements/SystemsLesson.png"));
                     popup = new Popup(
                             (World.SCREEN_SIZE.x - bf.getWidth()) / 2,
                             (World.SCREEN_SIZE.y - bf.getHeight()) / 2,
@@ -186,7 +197,7 @@ public class Game {
                             new ArrayList<>());
                     popup.content.add(popup.new Content(bf, true, 0, 0));
                 } catch (IOException e) {
-                    System.out.println("Could not read file src/main/java/assets/uielements/SystemsLesson.png");
+                    System.out.println("Could not read file assets/uielements/SystemsLesson.png");
                 }
                 map[8][5] = new PopupTile("EMPTY", false, popup);
                 map[8][6] = map[8][5];
@@ -195,7 +206,7 @@ public class Game {
             worlds[7] = new World(map, decorationLayer, new Coordinate(2, 7));
         } // School worlds
 
-        worlds[1] = World.generateRandomWorldWithDoors(new Coordinate(10, 10), 2);
+        worlds[1] = World.generateWorldFromFile("assets/world1/World1.lvl", new Coordinate(24,23));
 
         {
             map = new Tile[32][21];
@@ -203,13 +214,13 @@ public class Game {
                 for (int j = 0; j < map[0].length; j++) {
                     int r = (int) (Math.random() * 4);
                     if (r == 1) {
-                        map[i][j] = new Tile("WORLD1_GRASSTILE01", true);
+                        map[i][j] = new Tile("WORLD1_GRASSTILE01", false);
                     } else if (r == 2) {
-                        map[i][j] = new Tile("WORLD1_GRASSTILE02", true);
+                        map[i][j] = new Tile("WORLD1_GRASSTILE02", false);
                     } else if (r == 3) {
-                        map[i][j] = new Tile("WORLD1_GRASSTILE03", true);
+                        map[i][j] = new Tile("WORLD1_GRASSTILE03", false);
                     } else {
-                        map[i][j] = new Tile("WORLD1_GRASSTILE04", true);
+                        map[i][j] = new Tile("WORLD1_GRASSTILE04", false);
                     }
                 }
             }
@@ -234,18 +245,40 @@ public class Game {
                     map[i][j] = new Tile("WORLD1_PATHTILE_FULLPATH", true);
                 }
             }
-//            for (int i = 14; i < 17; i++) {
-//                for (int j = 15; j < 21; j++) {
-//                    map[i][j] = new Tile("WORLD1_PATHTILE_FULLPATH", true);
-//                }
-//            }
+            for (int i = 20; i < 24; i++) {
+                for (int j = 9; j < 12; j++) {
+                    map[i][j] = new Tile("WORLD1_PATHTILE_FULLPATH", true);
+                }
+            }
+            for (int i = 24; i < 26; i++) {
+                for (int j = 7; j < 12; j++) {
+                    map[i][j] = new Tile("WORLD1_PATHTILE_FULLPATH", true);
+                }
+            }
+            for (int i = 14; i < 17; i++) {
+                for (int j = 1; j < 6; j++) {
+                    map[i][j] = new Tile("WORLD1_PATHTILE_FULLPATH", true);
+                }
+            }
+            map[4][18] = new Door("EMPTY", 6);
+            map[5][18] = new Door("EMPTY", 6);
 
+            map[24][6] = new Door("EMPTY", 7);
+            map[25][6] = map[24][6];
+
+            map[14][0] = new Door("WORLD1_PATHTILE_FULLPATH", 8);
+            map[15][0] = map[14][0];
+            map[16][0] = map[14][0];
+
+            map[0][9] = new Door("WORLD1_PATHTILE_FULLPATH", 1);
+            map[0][10] = map[0][9];
+            map[0][11] = map[0][9];
 
             decorationLayer = new ArrayList<>();
             decorationLayer.add(new Decoration("SCHOOL_EXTERIOR", new Coordinate(1, 13)));
             decorationLayer.add(new Decoration("SCHOOL_EXTERIOR", new Coordinate(21, 1)));
         }
-        worlds[2] = new World(map, decorationLayer, new Coordinate(0, 10));
+        worlds[2] = new World(map, decorationLayer, new Coordinate(1, 10));
 
         map = new Tile[9][7];
         {
@@ -297,7 +330,7 @@ public class Game {
                     g2d.clearRect(0, 0, bg.getWidth(), bg.getHeight());
                     p.content.add(0, p.new Content(bg, true, 0, 0));
                     p.x = (World.SCREEN_SIZE.x - bg.getWidth()) / 2;
-                    map[1][4] = new PopupTile("WORLD1_GRASSTILE02", false, p);
+                    map[1][4] = new PopupTile("WORLD2_MAZETILE", false, p);
                 }
                 {
                     p = new Popup(100, 100, new ArrayList<>(), true, new ArrayList<>());
@@ -308,7 +341,7 @@ public class Game {
                     g2d.clearRect(0, 0, bg.getWidth(), bg.getHeight());
                     p.content.add(0, p.new Content(bg, true, 0, 0));
                     p.x = (World.SCREEN_SIZE.x - bg.getWidth()) / 2;
-                    map[3][4] = new PopupTile("WORLD1_GRASSTILE02", false, p);
+                    map[3][4] = new PopupTile("WORLD2_MAZETILE", false, p);
                 }
                 {
                     p = new Popup(100, 100, new ArrayList<>(), true, new ArrayList<>());
@@ -319,7 +352,7 @@ public class Game {
                     g2d.clearRect(0, 0, bg.getWidth(), bg.getHeight());
                     p.content.add(0, p.new Content(bg, true, 0, 0));
                     p.x = (World.SCREEN_SIZE.x - bg.getWidth()) / 2;
-                    map[5][4] = new PopupTile("WORLD1_GRASSTILE02", false, p);
+                    map[5][4] = new PopupTile("WORLD2_MAZETILE", false, p);
                 }
                 {
                     p = new Popup(100, 100, new ArrayList<>(), true, new ArrayList<>());
@@ -330,23 +363,31 @@ public class Game {
                     g2d.clearRect(0, 0, bg.getWidth(), bg.getHeight());
                     p.content.add(0, p.new Content(bg, true, 0, 0));
                     p.x = (World.SCREEN_SIZE.x - bg.getWidth()) / 2;
-                    map[7][4] = new PopupTile("WORLD1_GRASSTILE02", false, p);
+                    map[7][4] = new PopupTile("WORLD2_MAZETILE", false, p);
                 }
             }
+            decorationLayer = new ArrayList<>();
+            decorationLayer.add(new Decoration("PAPER_NOTES", new Coordinate(1,4)));
+            decorationLayer.add(new Decoration("PAPER_NOTES", new Coordinate(3,4)));
+            decorationLayer.add(new Decoration("PAPER_NOTES", new Coordinate(5,4)));
+            decorationLayer.add(new Decoration("PAPER_NOTES", new Coordinate(7,4)));
         }
-        worlds[9] = new World(map, new ArrayList<>(), new Coordinate(4, 6));
+        worlds[9] = new World(map, decorationLayer, new Coordinate(4, 6));
 
         Maze maze = MazeGenerator.getMaze();
         map = new Tile[maze.maze[0].length][maze.maze.length + 7];
         {
             for (int i = 0; i < map.length; i++) {
-                for (int j = 0; j < 5; j++) {
-                    map[i][j] = new Tile("WORLD1_GRASSTILE01", true);
+                map[i][0] = new Tile("BLACK", false);
+            }
+            for (int i = 0; i < map.length; i++) {
+                for (int j = 1; j < 5; j++) {
+                    map[i][j] = new Tile("WORLD2_SMOOTHTILE", true);
                 }
             }
             for (int i = 0; i < map.length; i++) {
                 for (int j = 29; j < map[0].length; j++) {
-                    map[i][j] = new Tile("WORLD1_GRASSTILE01", true);
+                    map[i][j] = new Tile("WORLD2_SMOOTHTILE", true);
                 }
             }
             for (int j = 0; j < maze.maze.length; j++) {
@@ -358,7 +399,7 @@ public class Game {
                 if (i != 4) map[i][29] = new Tile("BLACK", false);
                 if (i != 4) map[i][30] = new Tile("BLACK", false);
             }
-            map[4][0] = new Door("WORLD1_PATHTILE_FULLPATH", 9);
+            map[4][0] = new Door("WORLD2_SMOOTHTILE", 9);
             decorationLayer = new ArrayList<>();
             decorationLayer.add(new Decoration("X_AXIS_BAR", new Coordinate(0, 29)));
             decorationLayer.add(new Decoration("Y_AXIS_BAR_20_24", new Coordinate(9, 24)));
@@ -370,14 +411,16 @@ public class Game {
         worlds[8] = new MazeWorld(map, decorationLayer, new Coordinate(4,31));
     }
 
-
-
+    /**
+     * Sets the current active World (the World displayed to the player)
+     * to the World given by the index passed through the method.
+     * @param worldIndex The index of the World in the worlds array
+     */
     public static void setActiveWorld (int worldIndex) {
         frame.remove(worlds[currentWorld]);
         frame.removeKeyListener(worlds[currentWorld]);
         currentWorld = worldIndex;
         frame.addKeyListener(worlds[currentWorld]);
-        frame.setTitle("World " + currentWorld);
         frame.add(worlds[currentWorld]);
         for (int i = World.popupLayer.size() - 1; i >= 0; i--) {
             World.removePopup(World.popupLayer.get(i));
@@ -385,6 +428,11 @@ public class Game {
         frame.revalidate();
     }
 
+    /**
+     * Generates a Tile[][] map of tiles that can be used
+     * to create a World representing one of the game's classrooms.
+     * @return A Tile[][] initialized with Tile objects that can be passed to the World constructor.
+     */
     private static Tile[][] generateSchoolMap () {
         Tile[][] map = new Tile[11][9];
         for (int i = 0; i < map.length; i++) {
@@ -410,14 +458,36 @@ public class Game {
         return map;
     }
 
-    public static void main (String[] args) {
-        frame = new JFrame("World Test");
+    /**
+     * Sets up the JFrame, including the refresh rate using a Timer.
+     */
+    public static void startGame () {
+        frame = new JFrame("Modulo");
         frame.getContentPane().setBackground(Color.BLACK);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setActiveWorld(2);
+        setActiveWorld(0);
+        BufferedImage bf;
+        try {
+            bf = ImageIO.read(new File("assets/decorations/GameInstructions.png"));
+            Popup instructions = new Popup(0,0,new ArrayList<>(),true,new ArrayList<>());
+            instructions.content.add(instructions.new Content(bf,true, 0,0));
+            instructions.x = (World.SCREEN_SIZE.x - bf.getWidth(null))/2;
+            instructions.y = (World.SCREEN_SIZE.y - bf.getHeight(null))/2;
+            World.addPopup(instructions);
+        } catch (IOException e) {
+            System.out.println("Could not read assets/decorations/GameInstructions.png");
+        }
         frame.setVisible(true);
         Timer timer = new Timer(100, e -> frame.getContentPane().repaint());
         timer.start();
+    }
+
+    /**
+     * Main method.
+     * @param args Program arguments (ignored)
+     */
+    public static void main (String[] args) {
+        startGame();
     }
 }

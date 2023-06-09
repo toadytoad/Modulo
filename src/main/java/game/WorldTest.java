@@ -6,8 +6,6 @@ import java.util.ArrayList;
 
 
 /**
- * <h1>World Test</h1>
- *
  * Driver class to test basic World functionality
  *
  * @author Luke Mathieu
@@ -20,19 +18,11 @@ public class WorldTest {
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {
                 int random = (int)(Math.random()*4);
-//                random = 1;
                 if (random == 0) {
                     map[i][j] = new Tile("WORLD1_GRASSTILE01", false);
                 } else {
                     map[i][j] = new Tile("WORLD1_PATHTILE_FULLPATH", true);
                 }
-//                else if (random == 1){
-//                    map[i][j] = new Tile("WORLD1_PATHTILE_FULLPATH", true);
-//                } else if (random == 3) {
-//                    map[i][j] = new Tile("WORLD1_PATHTILE_LEFTEDGE", true);
-//                } else {
-//                    map[i][j] = new Tile("WORLD1_PATHTILE_RIGHTEDGE", true);
-//                }
             }
         }
         java.util.List<Decoration> decorationList = new ArrayList<>();

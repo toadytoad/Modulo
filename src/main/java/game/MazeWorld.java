@@ -10,16 +10,35 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.Timer;
 
+/**
+ * Extension of the World class to provide additional functionality required
+ * for the Maze level of the game.
+ *
+ * @author Luke Mathieu
+ */
 public class MazeWorld extends World {
     private int counter;
-    private Timer timer = new Timer(100, e -> counter += 1);
+    private final Timer timer = new Timer(100, e -> counter += 1);
     private boolean mazeActive;
-    public final static int TIME_PER_QUESTION = 200;
+    public final static int TIME_PER_QUESTION = 250;
     private MazeTile current;
+
+    /**
+     * Class constructor. Inherited from World.
+     * @param map The map of Tiles that make up this World.
+     * @param decorationList The list of decorations in this World.
+     * @param playerCoordinates The player's starting coordinates.
+     */
     public MazeWorld(Tile[][] map, java.util.List<Decoration> decorationList, Coordinate playerCoordinates) {
         super(map, decorationList, playerCoordinates);
     }
 
+    /**
+     * Method to draw one frame of the MazeWorld. Functions similar to
+     * World.paint() as a method to tick the game forward once, except that
+     * additional functionality so that this World can act as the maze level.
+     * @param g  the <code>Graphics</code> context in which to paint.
+     */
     @Override
     public void paint (Graphics g) {
         if (player.coordinate.y < 29 && player.coordinate.y > 3) {
@@ -34,26 +53,35 @@ public class MazeWorld extends World {
             generateNextPopup(current);
         }
 
-        if (counter == TIME_PER_QUESTION) {
+        if (counter >= TIME_PER_QUESTION && counter < TIME_PER_QUESTION + 10) {
             burnAroundPlayer();
+            counter = TIME_PER_QUESTION + 10;
         }
 
         if (mazeActive && current.next instanceof MazeTile && player.coordinate.y < ((MazeTile)current.next).y + 3) {
             burnAroundPlayer();
         }
 
-        if (counter == TIME_PER_QUESTION + 10) {
+        if (mazeActive && current.next instanceof MazeTile && player.coordinate.x == ((MazeTile)current.next).x && player.coordinate.y == ((MazeTile)current.next).y + 4) {
+            counter+=2;
+        }
+
+        if (counter >= TIME_PER_QUESTION + 30) {
             extinguishMaze();
             counter = 0;
             current = (MazeTile) current.next;
             if (current != null) {
+                if (!popupLayer.isEmpty()) removePopup(popupLayer.get(0));
                 generateNextPopup(current);
             }
         }
 
         super.paint(g);
-        g.setColor(Color.WHITE);
-        g.drawString(Integer.toString(counter), 100, 100);
+        for (Popup popup : popupLayer) {
+            popup.isVisible = true;
+        }
+//        g.setColor(Color.WHITE);
+//        g.drawString(Integer.toString(counter), 100, 100);
 
         if (mazeActive && map[player.coordinate.x][player.coordinate.y] instanceof MazeTile && !((MazeTile)map[player.coordinate.x][player.coordinate.y]).isSafe) {
             resetMaze();
@@ -62,6 +90,10 @@ public class MazeWorld extends World {
         }
     }
 
+    /**
+     * Burns the tiles located directly around the player, making them unsafe for the player
+     * to walk on.
+     */
     private void burnAroundPlayer () {
         for (int i = player.coordinate.x - 1; i <= player.coordinate.x + 1; i++) {
             for (int j = player.coordinate.y - 1; j <= player.coordinate.y + 1; j++) {
@@ -74,6 +106,9 @@ public class MazeWorld extends World {
         }
     }
 
+    /**
+     * Extinguishes all Tiles in the maze, making them safe to walk on again.
+     */
     private void extinguishMaze () {
         for (int i = 0; i < 9; i++) {
             for (int j = 4; j < 29; j++) {
@@ -82,9 +117,14 @@ public class MazeWorld extends World {
         }
     }
 
+    /**
+     * Generates the next Popup that displays the Problem whose solution
+     * leads to the next safe Tile in the maze.
+     * @param mazeTile The current safe MazeTile.
+     */
     private void generateNextPopup(MazeTile mazeTile) {
         if (mazeTile.next instanceof MazeTile) {
-            Problem p = ProblemFactory.getSystem(0,2,((MazeTile) mazeTile.next).x, ((MazeTile) mazeTile.next).y);
+            Problem p = ProblemFactory.getSystem(1,3,((MazeTile) mazeTile.next).x, ((MazeTile) mazeTile.next).y);
             Popup popup = new Popup(100, 500,
                     new ArrayList<>(),
                     true,new ArrayList<>());
@@ -94,10 +134,14 @@ public class MazeWorld extends World {
             g2d.setBackground(Color.WHITE);
             g2d.clearRect(0, 0, bg.getWidth(), bg.getHeight());
             popup.content.add(0, popup.new Content(bg, true, 0, 0));
+            popup.y = (SCREEN_SIZE.y - popup.content.get(0).content.getHeight(null)) / 2;
             addPopup(popup);
         }
     }
 
+    /**
+     * Resets the maze.
+     */
     private void resetMaze() {
         timer.stop();
         counter = 0;
