@@ -20,10 +20,9 @@ public class CombinationLock extends Popup {
             ));
         } catch (IOException e) {
             System.out.println("Could not read file src/main/java/assets/uielements/PadlockGUI.png");
-            System.exit(-1);
         }
-        super.x = (World.SCREEN_SIZE.x - content.get(0).content.getWidth())/2;
-        super.y = (World.SCREEN_SIZE.y - content.get(0).content.getHeight())/2;
+        super.x = (World.SCREEN_SIZE.x - content.get(0).content.getWidth(null))/2;
+        super.y = (World.SCREEN_SIZE.y - content.get(0).content.getHeight(null))/2;
 
         super.buttons.add(new Button(
                 null,null,null,

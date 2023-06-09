@@ -89,7 +89,7 @@ public class MazeWorld extends World {
                     new ArrayList<>(),
                     true,new ArrayList<>());
             popup.content.add(popup.new Content(LatexParser.parseProblem(p, 40), true, 0,0));
-            BufferedImage bg = new BufferedImage(popup.content.get(0).content.getWidth(), popup.content.get(0).content.getHeight(), BufferedImage.TYPE_INT_ARGB);
+            BufferedImage bg = new BufferedImage(popup.content.get(0).content.getWidth(null), popup.content.get(0).content.getHeight(null), BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2d = bg.createGraphics();
             g2d.setBackground(Color.WHITE);
             g2d.clearRect(0, 0, bg.getWidth(), bg.getHeight());

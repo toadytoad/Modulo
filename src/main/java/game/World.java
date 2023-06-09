@@ -20,7 +20,7 @@ import java.util.List;
 public class World extends JComponent implements KeyListener {
     final Tile[][] map;
     private final java.util.List<Decoration> decorationLayer;
-    static java.util.List<Popup> popupLayer = new ArrayList<>();
+    public static java.util.List<Popup> popupLayer = new ArrayList<>();
     Player player = new Player(0, 0);
     private Coordinate screenOffset;
     public final static int TILE_LENGTH = 60;

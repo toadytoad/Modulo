@@ -90,7 +90,7 @@ public class Popup implements MouseListener, MouseMotionListener {
         }
     }
     public class Content{
-        BufferedImage content;
+        Image content;
         boolean isVisible;
         int x,y;
         public Content(BufferedImage content, boolean isVisible, int x, int y) {
