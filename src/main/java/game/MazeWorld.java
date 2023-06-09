@@ -63,7 +63,7 @@ public class MazeWorld extends World {
         }
 
         if (mazeActive && current.next instanceof MazeTile && player.coordinate.x == ((MazeTile)current.next).x && player.coordinate.y == ((MazeTile)current.next).y + 4) {
-            counter+=2;
+            counter+=7;
         }
 
         if (counter >= TIME_PER_QUESTION + 30) {
@@ -124,17 +124,33 @@ public class MazeWorld extends World {
      */
     private void generateNextPopup(MazeTile mazeTile) {
         if (mazeTile.next instanceof MazeTile) {
-            Problem p = ProblemFactory.getSystem(1,3,((MazeTile) mazeTile.next).x, ((MazeTile) mazeTile.next).y);
             Popup popup = new Popup(100, 500,
                     new ArrayList<>(),
                     true,new ArrayList<>());
-            popup.content.add(popup.new Content(LatexParser.parseProblem(p, 40), true, 0,0));
-            BufferedImage bg = new BufferedImage(popup.content.get(0).content.getWidth(null), popup.content.get(0).content.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-            Graphics2D g2d = bg.createGraphics();
-            g2d.setBackground(Color.WHITE);
-            g2d.clearRect(0, 0, bg.getWidth(), bg.getHeight());
+            BufferedImage bg;
+            if (((MazeTile)current.next).y > 11) {
+                Problem p = ProblemFactory.getLinearEquation(1, 5, "x", ((MazeTile) mazeTile.next).x);
+                popup.content.add(popup.new Content(LatexParser.parseProblem(p, 40), true, 0,0));
+                p = ProblemFactory.getLinearEquation(1, 5, "y", ((MazeTile) mazeTile.next).y);
+                popup.content.add(popup.new Content(LatexParser.parseProblem(p, 40), true, 0,popup.content.get(0).content.getHeight(null)));
+
+                bg = new BufferedImage(Math.max(popup.content.get(0).content.getWidth(null),popup.content.get(1).content.getWidth(null)), popup.content.get(0).content.getHeight(null)+popup.content.get(1).content.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2d = bg.createGraphics();
+                g2d.setBackground(Color.WHITE);
+                g2d.clearRect(0, 0, bg.getWidth(), bg.getHeight());
+            }
+            else {
+                Problem p = ProblemFactory.getSystem(1, 3, ((MazeTile) mazeTile.next).x, ((MazeTile) mazeTile.next).y);
+                popup.content.add(popup.new Content(LatexParser.parseProblem(p, 40), true, 0,0));
+                bg = new BufferedImage(popup.content.get(0).content.getWidth(null), popup.content.get(0).content.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2d = bg.createGraphics();
+                g2d.setBackground(Color.WHITE);
+                g2d.clearRect(0, 0, bg.getWidth(), bg.getHeight());
+            }
+
             popup.content.add(0, popup.new Content(bg, true, 0, 0));
             popup.y = (SCREEN_SIZE.y - popup.content.get(0).content.getHeight(null)) / 2;
+            System.out.println("Next Tile of the Maze: " + ((MazeTile)current.next).x + ", " + ((MazeTile)current.next).y);
             addPopup(popup);
         }
     }

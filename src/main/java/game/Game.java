@@ -402,6 +402,8 @@ public class Game {
             map[4][0] = new Door("WORLD2_SMOOTHTILE", 9);
             decorationLayer = new ArrayList<>();
             decorationLayer.add(new Decoration("X_AXIS_BAR", new Coordinate(0, 29)));
+            decorationLayer.add(new Decoration("X_AXIS_BAR", new Coordinate(0, 16)));
+            decorationLayer.add(new Decoration("X_AXIS_BAR", new Coordinate(0, 3)));
             decorationLayer.add(new Decoration("Y_AXIS_BAR_20_24", new Coordinate(9, 24)));
             decorationLayer.add(new Decoration("Y_AXIS_BAR_15_19", new Coordinate(9, 19)));
             decorationLayer.add(new Decoration("Y_AXIS_BAR_10_14", new Coordinate(9, 14)));
