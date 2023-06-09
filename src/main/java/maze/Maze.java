@@ -5,8 +5,14 @@ import game.Tile;
 
 import java.util.LinkedList;
 
+/**
+ * Stores the maze used for the Maze level, represented by an array of MazeTiles,
+ * which can be translated into a World.
+ *
+ * @author Tom Philip
+ */
 public class Maze {
-    MazeTile[][] maze;
+    public MazeTile[][] maze;
     LinkedList<Coordinate> path;
     public static Maze getBlankMaze(){
         Maze m = new Maze();

@@ -7,12 +7,27 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
+/**
+ * Popups are painted on top of all other screen elements, and are capable of
+ * user interaction through the Button inner class.
+ *
+ * @author Tom Philip
+ */
 public class Popup implements MouseListener, MouseMotionListener {
     int x,y;
     List<Button> buttons;
     boolean isVisible;
     List<Content> content;
 
+    /**
+     * Constructs a Popup with the specified content, at the specified coordinates, with
+     * the specified visibility.
+     * @param x The x-coordinate the Popup should be drawn at.
+     * @param y The y-coordinate the Popup should be drawn at
+     * @param buttons The list of Buttons in this Popup
+     * @param isVisible Whether this Popup is visible.
+     * @param content The list of Content in this Popup.
+     */
     public Popup(int x, int y, List<Button> buttons, boolean isVisible, List<Content> content) {
         this.x = x;
         this.y = y;
@@ -26,7 +41,7 @@ public class Popup implements MouseListener, MouseMotionListener {
         if(this.isVisible) {
             for (Button b : buttons) {
                 if(b.isVisible&&b.bounds.contains(e.getPoint()))
-                b.onClicked();
+                    b.onClicked();
             }
         }
     }
@@ -36,7 +51,7 @@ public class Popup implements MouseListener, MouseMotionListener {
         if(this.isVisible) {
             for (Button b : buttons) {
                 if(b.isVisible&&b.bounds.contains(e.getPoint()))
-                b.setToClicked();
+                    b.setToClicked();
             }
         }
     }
@@ -46,7 +61,7 @@ public class Popup implements MouseListener, MouseMotionListener {
         if(this.isVisible) {
             for (Button b : buttons) {
                 if(b.isVisible&&b.bounds.contains(e.getPoint()))
-                b.onReleased();
+                    b.onReleased();
             }
         }
     }
@@ -60,9 +75,7 @@ public class Popup implements MouseListener, MouseMotionListener {
     public void mouseExited(MouseEvent e) {}
 
     @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
+    public void mouseDragged(MouseEvent e) {}
 
     @Override
     public void mouseMoved(MouseEvent e) {
@@ -76,8 +89,13 @@ public class Popup implements MouseListener, MouseMotionListener {
         }
     }
 
+    /**
+     * Paints all the Content and Buttons in this Popup
+     * @param g The Graphics context to be painted on.
+     */
     public void paint(Graphics g) {
         if(this.isVisible) {
+
             for(Content c : content) {
                 if(c.isVisible) {
                     g.drawImage(c.content, this.x+c.x, this.y+c.y, null);
@@ -90,8 +108,12 @@ public class Popup implements MouseListener, MouseMotionListener {
             }
         }
     }
+
+    /**
+     * Internal class to represent Content that a Popup can display.
+     */
     public class Content{
-        BufferedImage content;
+        Image content;
         boolean isVisible;
         int x,y;
         public Content(BufferedImage content, boolean isVisible, int x, int y) {
@@ -101,6 +123,12 @@ public class Popup implements MouseListener, MouseMotionListener {
             this.y=y;
         }
     }
+
+    /**
+     * Internal class to represent Buttons within a Popup. Supports multiple
+     * images that are swapped when the user hovers or clicks on the button.
+     * Behaviours can be attached to a Button by overriding the onClicked() method.
+     */
     public class Button {
         private final Image def;
         private final Image hovering;
@@ -109,11 +137,15 @@ public class Popup implements MouseListener, MouseMotionListener {
         int x,y;
         boolean isVisible;
         Rectangle bounds;
-        public Button(Image def, Image hovering, Image clicked){
+        public Button(Image def, Image hovering, Image clicked, int x, int y, boolean isVisible, Rectangle bounds){
             this.def=def;
             this.hovering = hovering;
             this.clicked = clicked;
             this.current = def;
+            this.x = x;
+            this.y = y;
+            this.isVisible = isVisible;
+            this.bounds = bounds;
         }
         public Image getImage(){
             return this.current;
