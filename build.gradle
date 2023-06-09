@@ -10,6 +10,11 @@ repositories {
 
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class':'game.Game'
+    }
+}
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
