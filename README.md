@@ -23,4 +23,4 @@ equations correnspond to digits of the combination lock. Enter the correct combi
 1. Ensure that Java 17 is installed.
 2. Extract all files from the Modulo.zip file
 3. Verify that the .jar file is located in the same directory as a folder named "assets", and that the assets folder contains PNG files and subdirectories.
-4. Run the program, either by double-clicking the .jar file or running it from the console using "java -jar Modulo-1.0-SNAPSHOT-all.jar".
+4. Run the program, either by double-clicking the .jar file or running it from the console using "java -jar Modulo-1.0-all.jar".
