@@ -194,8 +194,58 @@ public class Game {
             }
             worlds[7] = new World(map, decorationLayer, new Coordinate(2, 7));
         } // School worlds
+
         worlds[1] = World.generateRandomWorldWithDoors(new Coordinate(10, 10), 2);
-        worlds[2] = World.generateWorldFromFile("src/main/java/game/testWorld.lvl");
+
+        {
+            map = new Tile[32][21];
+            for (int i = 0; i < map.length; i++) {
+                for (int j = 0; j < map[0].length; j++) {
+                    int r = (int) (Math.random() * 4);
+                    if (r == 1) {
+                        map[i][j] = new Tile("WORLD1_GRASSTILE01", true);
+                    } else if (r == 2) {
+                        map[i][j] = new Tile("WORLD1_GRASSTILE02", true);
+                    } else if (r == 3) {
+                        map[i][j] = new Tile("WORLD1_GRASSTILE03", true);
+                    } else {
+                        map[i][j] = new Tile("WORLD1_GRASSTILE04", true);
+                    }
+                }
+            }
+
+            for (int i = 0; i < 11; i++) {
+                for (int j = 9; j < 12; j++) {
+                    map[i][j] = new Tile("WORLD1_PATHTILE_FULLPATH", true);
+                }
+            }
+            for (int i = 11; i < 20; i++) {
+                for (int j = 6; j < 15; j++) {
+                    map[i][j] = new Tile("WORLD1_PATHTILE_FULLPATH", true);
+                }
+            }
+            for (int i = 4; i < 14; i++) {
+                for (int j = 19; j < 21; j++) {
+                    map[i][j] = new Tile("WORLD1_PATHTILE_FULLPATH", true);
+                }
+            }
+            for (int i = 14; i < 17; i++) {
+                for (int j = 15; j < 21; j++) {
+                    map[i][j] = new Tile("WORLD1_PATHTILE_FULLPATH", true);
+                }
+            }
+//            for (int i = 14; i < 17; i++) {
+//                for (int j = 15; j < 21; j++) {
+//                    map[i][j] = new Tile("WORLD1_PATHTILE_FULLPATH", true);
+//                }
+//            }
+
+
+            decorationLayer = new ArrayList<>();
+            decorationLayer.add(new Decoration("SCHOOL_EXTERIOR", new Coordinate(1, 13)));
+            decorationLayer.add(new Decoration("SCHOOL_EXTERIOR", new Coordinate(21, 1)));
+        }
+        worlds[2] = new World(map, decorationLayer, new Coordinate(0, 10));
 
         map = new Tile[9][7];
         {
@@ -365,7 +415,7 @@ public class Game {
         frame.getContentPane().setBackground(Color.BLACK);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setActiveWorld(7);
+        setActiveWorld(2);
         frame.setVisible(true);
         Timer timer = new Timer(100, e -> frame.getContentPane().repaint());
         timer.start();
