@@ -176,6 +176,7 @@ public class World extends JComponent implements KeyListener {
 
     /**
      * Generates a random World containing only walkable and non-walkable Tiles.
+     * @param size The size of the World as a Coordinate.
      * @return A new World object, with a random map of walkable and non-walkable Tiles.
      */
     public static World generateRandomWorld(Coordinate size) {
