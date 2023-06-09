@@ -30,7 +30,7 @@ public class World extends JComponent implements KeyListener {
     private Coordinate screenOffset;
     public final static int TILE_LENGTH = 60;
     public final static Coordinate SCREEN_SIZE = new Coordinate(Toolkit.getDefaultToolkit().getScreenSize());
-    private final static Coordinate tilesOnScreen = new Coordinate(SCREEN_SIZE.x / TILE_LENGTH, SCREEN_SIZE.y / TILE_LENGTH - 1);;
+    private final static Coordinate tilesOnScreen = new Coordinate(SCREEN_SIZE.x / TILE_LENGTH, SCREEN_SIZE.y / TILE_LENGTH - 1);
     public static HashMap<Character, Boolean> keysPressed;
 
     static {

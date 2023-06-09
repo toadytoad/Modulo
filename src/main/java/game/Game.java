@@ -466,6 +466,7 @@ public class Game {
     public static void startGame () {
         frame = new JFrame("Modulo");
         frame.getContentPane().setBackground(Color.BLACK);
+        frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setActiveWorld(0);
@@ -481,6 +482,7 @@ public class Game {
             System.out.println("Could not read assets/decorations/GameInstructions.png");
         }
         frame.setVisible(true);
+        frame.requestFocus();
         Timer timer = new Timer(100, e -> frame.getContentPane().repaint());
         timer.start();
     }
