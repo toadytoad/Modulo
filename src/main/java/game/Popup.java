@@ -17,6 +17,7 @@ public class Popup implements MouseListener, MouseMotionListener {
     int x,y;
     List<Button> buttons;
     boolean isVisible;
+    boolean alwaysVisible;
     List<Content> content;
 
     /**
@@ -34,6 +35,22 @@ public class Popup implements MouseListener, MouseMotionListener {
         this.buttons = buttons;
         this.isVisible = isVisible;
         this.content = content;
+        alwaysVisible = false;
+    }
+
+    /**
+     * Constructs a Popup with the specified content, at the specified coordinates, with
+     * the specified visibility.
+     * @param x The x-coordinate the Popup should be drawn at.
+     * @param y The y-coordinate the Popup should be drawn at
+     * @param buttons The list of Buttons in this Popup
+     * @param isVisible Whether this Popup is visible.
+     * @param content The list of Content in this Popup.
+     * @param alwaysVisible Whether the Popup should be set to invisible when the player moves.
+     */
+    public Popup(int x, int y, List<Button> buttons, boolean isVisible, List<Content> content, boolean alwaysVisible) {
+        this(x,y,buttons,isVisible,content);
+        this.alwaysVisible = alwaysVisible;
     }
 
     @Override

@@ -41,6 +41,12 @@ public class MazeWorld extends World {
      */
     @Override
     public void paint (Graphics g) {
+        g.setFont(new Font("default", Font.PLAIN,20));
+        g.setColor(Color.WHITE);
+        g.drawString("Make it to the other side of the maze by solving the equations that", 20,50);
+        g.drawString("appear. The x-variable corresponds to your horizontal coordinate,",20,80);
+        g.drawString("and the y-variable corresponds to your vertical coordinate.",20,110);
+
         if (player.coordinate.y < 29 && player.coordinate.y > 3) {
             if (!timer.isRunning()) timer.start();
         } else {
@@ -58,7 +64,7 @@ public class MazeWorld extends World {
             counter = TIME_PER_QUESTION + 10;
         }
 
-        if (mazeActive && current.next instanceof MazeTile && player.coordinate.y < ((MazeTile)current.next).y + 3) {
+        if (mazeActive && current.next instanceof MazeTile && player.coordinate.y < ((MazeTile)current.next).y + 1) {
             burnAroundPlayer();
         }
 
@@ -71,15 +77,12 @@ public class MazeWorld extends World {
             counter = 0;
             current = (MazeTile) current.next;
             if (current != null) {
-                if (!popupLayer.isEmpty()) removePopup(popupLayer.get(0));
+                if (!popupLayer.isEmpty()) removePopup(popupLayer.get(popupLayer.size()-1));
                 generateNextPopup(current);
             }
         }
 
         super.paint(g);
-        for (Popup popup : popupLayer) {
-            popup.isVisible = true;
-        }
 //        g.setColor(Color.WHITE);
 //        g.drawString(Integer.toString(counter), 100, 100);
 
@@ -126,7 +129,9 @@ public class MazeWorld extends World {
         if (mazeTile.next instanceof MazeTile) {
             Popup popup = new Popup(100, 500,
                     new ArrayList<>(),
-                    true,new ArrayList<>());
+                    true,
+                    new ArrayList<>(),
+                    true);
             BufferedImage bg;
             if (((MazeTile)current.next).y > 11) {
                 Problem p = ProblemFactory.getLinearEquation(1, 5, "x", ((MazeTile) mazeTile.next).x);

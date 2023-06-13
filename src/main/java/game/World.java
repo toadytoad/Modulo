@@ -130,7 +130,9 @@ public class World extends JComponent implements KeyListener {
         }
         if (player.getMovement().x != 0 || player.getMovement().y != 0) {
             for (Popup popup : popupLayer) {
-                popup.isVisible = false;
+                if (!popup.alwaysVisible) {
+                    popup.isVisible = false;
+                }
             }
         }
     }
