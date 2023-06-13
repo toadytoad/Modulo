@@ -2,9 +2,7 @@ package game;
 
 import maze.Maze;
 import maze.MazeGenerator;
-import problem.LatexParser;
-import problem.Problem;
-import problem.ProblemFactory;
+import problem.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

@@ -204,6 +204,7 @@ public class World extends JComponent implements KeyListener {
      * @param doorTarget The world index that the door will lead to.
      * @return A new random World object, containing a single Door to another World.
      */
+    @Deprecated
     public static World generateRandomWorldWithDoors (Coordinate size, int doorTarget) {
         World world = generateRandomWorld(size);
         Coordinate doorCoordinate = new Coordinate((int)(Math.random()*size.x), (int)(Math.random()*size.y));
