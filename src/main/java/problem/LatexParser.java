@@ -40,11 +40,6 @@ public class LatexParser {
         JLabel jl = new JLabel();
         jl.setForeground(new Color(0, 0, 0));
         ti.paintIcon(jl, g2d, 0, 0);
-
-        File out = new File("./out.png");
-        try {
-            ImageIO.write(bimg, "png", out);
-        } catch(Exception ignored){}
         return bimg;
     }
 
