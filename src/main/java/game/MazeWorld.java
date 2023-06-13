@@ -43,9 +43,12 @@ public class MazeWorld extends World {
     public void paint (Graphics g) {
         g.setFont(new Font("default", Font.PLAIN,20));
         g.setColor(Color.WHITE);
-        g.drawString("Make it to the other side of the maze by solving the equations that", 20,50);
-        g.drawString("appear. The x-variable corresponds to your horizontal coordinate,",20,80);
-        g.drawString("and the y-variable corresponds to your vertical coordinate.",20,110);
+        g.drawString("Make it to the other side of the maze", 20,50);
+        g.drawString("by solving the equations that appear.",20,80);
+        g.drawString("The x-variable corresponds to your",20,110);
+        g.drawString("horizontal coordinate, and the",20,140);
+        g.drawString("y-variable corresponds to your",20,170);
+        g.drawString("vertical coordinate.",20,200);
 
         if (player.coordinate.y < 29 && player.coordinate.y > 3) {
             if (!timer.isRunning()) timer.start();
@@ -98,11 +101,8 @@ public class MazeWorld extends World {
      * to walk on.
      */
     private void burnAroundPlayer () {
-        for (int i = player.coordinate.x - 1; i <= player.coordinate.x + 1; i++) {
-            for (int j = player.coordinate.y - 1; j <= player.coordinate.y + 1; j++) {
-                if (i < 0 || i > 8 || j < 4 || j > 28) {
-                    continue;
-                }
+        for (int i = 0; i < 9; i++) {
+            for (int j = 4; j < 29; j++) {
                 if (i == ((MazeTile)current.next).x && j == ((MazeTile)current.next).y + 4) continue;
                 ((MazeTile)map[i][j]).burn();
             }

@@ -8,7 +8,8 @@ import java.util.ArrayList;
 
 /**
  * Extension of the Popup class to create the combination lock used in the
- * escape room. Uses Buttons to provide functionality.
+ * escape room. Uses Buttons to provide functionality. drawCenteredString() method
+ * provided courtesy of StackOverflow.
  *
  * @author Luke Mathieu
  */

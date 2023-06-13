@@ -233,7 +233,7 @@ public class Game {
                     map[i][j] = new Tile("WORLD1_PATHTILE_FULLPATH", true);
                 }
             }
-            for (int i = 4; i < 14; i++) {
+            for (int i = 3; i < 14; i++) {
                 for (int j = 19; j < 21; j++) {
                     map[i][j] = new Tile("WORLD1_PATHTILE_FULLPATH", true);
                 }
@@ -248,7 +248,7 @@ public class Game {
                     map[i][j] = new Tile("WORLD1_PATHTILE_FULLPATH", true);
                 }
             }
-            for (int i = 24; i < 26; i++) {
+            for (int i = 23; i < 26; i++) {
                 for (int j = 7; j < 12; j++) {
                     map[i][j] = new Tile("WORLD1_PATHTILE_FULLPATH", true);
                 }
@@ -259,10 +259,7 @@ public class Game {
                 }
             }
             map[4][18] = new Door("EMPTY", 6);
-            map[5][18] = new Door("EMPTY", 6);
-
             map[24][6] = new Door("EMPTY", 7);
-            map[25][6] = map[24][6];
 
             map[14][0] = new Door("WORLD1_PATHTILE_FULLPATH", 8);
             map[15][0] = map[14][0];
@@ -273,8 +270,39 @@ public class Game {
             map[0][11] = map[0][9];
 
             decorationLayer = new ArrayList<>();
-            decorationLayer.add(new Decoration("SCHOOL_EXTERIOR", new Coordinate(1, 13)));
-            decorationLayer.add(new Decoration("SCHOOL_EXTERIOR", new Coordinate(21, 1)));
+            decorationLayer.add(new Decoration("TREE", new Coordinate(10, 15)));
+            decorationLayer.add(new Decoration("TREE", new Coordinate(19, 16)));
+            decorationLayer.add(new Decoration("TREE", new Coordinate(3, 4)));
+            decorationLayer.add(new Decoration("TREE", new Coordinate(7, 1)));
+            decorationLayer.add(new Decoration("TREE", new Coordinate(10, 0)));
+            decorationLayer.add(new Decoration("TREE", new Coordinate(0, 12)));
+            decorationLayer.add(new Decoration("TREE", new Coordinate(24, 13)));
+            decorationLayer.add(new Decoration("TREE", new Coordinate(28, 7)));
+            decorationLayer.add(new Decoration("TREE", new Coordinate(18, 0)));
+            decorationLayer.add(new Decoration("SCHOOL_EXTERIOR", new Coordinate(2, 13)));
+            decorationLayer.add(new Decoration("SCHOOL_EXTERIOR", new Coordinate(22, 1)));
+            decorationLayer.add(new Decoration("LABEL_ALGEBRA_2", new Coordinate(23, 4)));
+            decorationLayer.add(new Decoration("LABEL_ALGEBRA_1", new Coordinate(3, 16)));
+            decorationLayer.add(new Decoration("SIGN_ALGEBRA_1", new Coordinate(18, 16)));
+            decorationLayer.add(new Decoration("SIGN_ALGEBRA_2", new Coordinate(21, 7)));
+            decorationLayer.add(new Decoration("FLOWER_1", new Coordinate(7, 7)));
+            decorationLayer.add(new Decoration("FLOWER_3", new Coordinate(9, 6)));
+            decorationLayer.add(new Decoration("FLOWER_1", new Coordinate(18, 4)));
+            decorationLayer.add(new Decoration("FLOWER_2", new Coordinate(6, 13)));
+            decorationLayer.add(new Decoration("FLOWER_3", new Coordinate(2, 7)));
+            decorationLayer.add(new Decoration("FLOWER_1", new Coordinate(5, 2)));
+            decorationLayer.add(new Decoration("FLOWER_1", new Coordinate(13, 2)));
+            decorationLayer.add(new Decoration("FLOWER_2", new Coordinate(17, 1)));
+            decorationLayer.add(new Decoration("FLOWER_2", new Coordinate(27, 7)));
+            decorationLayer.add(new Decoration("FLOWER_1", new Coordinate(28, 12)));
+            decorationLayer.add(new Decoration("FLOWER_3", new Coordinate(22, 13)));
+            decorationLayer.add(new Decoration("FLOWER_1", new Coordinate(21, 15)));
+            decorationLayer.add(new Decoration("FLOWER_3", new Coordinate(24, 18)));
+            decorationLayer.add(new Decoration("FLOWER_1", new Coordinate(8, 18)));
+            decorationLayer.add(new Decoration("FLOWER_2", new Coordinate(1, 19)));
+            decorationLayer.add(new Decoration("FLOWER_3", new Coordinate(0, 16)));
+            decorationLayer.add(new Decoration("SIGN_WARNING", new Coordinate(12,4)));
+            decorationLayer.add(new Decoration("SIGN_FOREST", new Coordinate(3,8)));
         }
         worlds[2] = new World(map, decorationLayer, new Coordinate(1, 10));
 
