@@ -8,7 +8,8 @@ import java.util.ArrayList;
 
 /**
  * Extension of the Popup class to create the combination lock used in the
- * escape room. Uses Buttons to provide functionality.
+ * escape room. Uses Buttons to provide functionality. drawCenteredString() method
+ * provided courtesy of StackOverflow.
  *
  * @author Luke Mathieu
  */
@@ -178,6 +179,7 @@ public class CombinationLock extends Popup {
      * @param g The Graphics instance.
      * @param text The String to draw.
      * @param rect The Rectangle to center the text in.
+     * @param font The Font the String should be drawn in.
      */
     public static void drawCenteredString(Graphics g, String text, Rectangle rect, Font font) {
         FontMetrics metrics = g.getFontMetrics(font);

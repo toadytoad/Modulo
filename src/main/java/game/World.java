@@ -30,7 +30,7 @@ public class World extends JComponent implements KeyListener {
     private Coordinate screenOffset;
     public final static int TILE_LENGTH = 60;
     public final static Coordinate SCREEN_SIZE = new Coordinate(Toolkit.getDefaultToolkit().getScreenSize());
-    private final static Coordinate tilesOnScreen = new Coordinate(SCREEN_SIZE.x / TILE_LENGTH, SCREEN_SIZE.y / TILE_LENGTH - 1);;
+    private final static Coordinate tilesOnScreen = new Coordinate(SCREEN_SIZE.x / TILE_LENGTH, SCREEN_SIZE.y / TILE_LENGTH - 1);
     public static HashMap<Character, Boolean> keysPressed;
 
     static {
@@ -130,7 +130,9 @@ public class World extends JComponent implements KeyListener {
         }
         if (player.getMovement().x != 0 || player.getMovement().y != 0) {
             for (Popup popup : popupLayer) {
-                popup.isVisible = false;
+                if (!popup.alwaysVisible) {
+                    popup.isVisible = false;
+                }
             }
         }
     }
@@ -176,6 +178,7 @@ public class World extends JComponent implements KeyListener {
 
     /**
      * Generates a random World containing only walkable and non-walkable Tiles.
+     * @param size The size of the World as a Coordinate.
      * @return A new World object, with a random map of walkable and non-walkable Tiles.
      */
     public static World generateRandomWorld(Coordinate size) {
@@ -201,6 +204,7 @@ public class World extends JComponent implements KeyListener {
      * @param doorTarget The world index that the door will lead to.
      * @return A new random World object, containing a single Door to another World.
      */
+    @Deprecated
     public static World generateRandomWorldWithDoors (Coordinate size, int doorTarget) {
         World world = generateRandomWorld(size);
         Coordinate doorCoordinate = new Coordinate((int)(Math.random()*size.x), (int)(Math.random()*size.y));

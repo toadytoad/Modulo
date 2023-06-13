@@ -32,8 +32,23 @@ public class Decoration {
         decorationSprites.put("SCHOOL_INTERIOR", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/LearningHouseInterior.png"), new Coordinate(11, 9)));
         decorationSprites.put("SCHOOL_TEACHER_1", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/Teacher01.gif"), new Coordinate(1, 2)));
         decorationSprites.put("HOUSE_EXTERIOR", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/StarterHouse.png"), new Coordinate(5,6)));
-        decorationSprites.put("SCHOOL_EXTERIOR", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/StarterHouse.png"), new Coordinate(8,6)));
+        decorationSprites.put("SCHOOL_EXTERIOR", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/LearningHouse.png"), new Coordinate(8,6)));
         decorationSprites.put("PAPER_NOTES", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/PaperNotes.png"), new Coordinate(1,1)));
+        decorationSprites.put("FLOWER_1", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/Flower1.png"), new Coordinate(1,1)));
+        decorationSprites.put("FLOWER_2", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/Flower2.png"), new Coordinate(1,1)));
+        decorationSprites.put("FLOWER_3", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/Flower3.png"), new Coordinate(1,1)));
+        decorationSprites.put("LABEL_ALGEBRA_1", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/Label_Algebra1.png"), new Coordinate(3,1)));
+        decorationSprites.put("LABEL_ALGEBRA_2", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/Label_Algebra2.png"), new Coordinate(3,1)));
+        decorationSprites.put("LABEL_DIVISION", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/Label_Division.png"), new Coordinate(3,1)));
+        decorationSprites.put("LABEL_MULTIPLICATION", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/Label_Multiplication.png"), new Coordinate(3,1)));
+        decorationSprites.put("SIGN_ADDSUBTRACT", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/Sign_AddSubtract.png"), new Coordinate(1,1)));
+        decorationSprites.put("SIGN_ALGEBRA_1", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/Sign_Algebra1.png"), new Coordinate(1,1)));
+        decorationSprites.put("SIGN_ALGEBRA_2", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/Sign_Algebra2.png"), new Coordinate(1,1)));
+        decorationSprites.put("SIGN_DIVIDE", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/Sign_Divide.png"), new Coordinate(1,1)));
+        decorationSprites.put("SIGN_FOREST", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/Sign_Forest.png"), new Coordinate(1,1)));
+        decorationSprites.put("SIGN_HOUSE", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/Sign_House.png"), new Coordinate(1,1)));
+        decorationSprites.put("SIGN_MULTIPLY", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/Sign_Multiply.png"), new Coordinate(1,1)));
+        decorationSprites.put("SIGN_WARNING", new DecorationImage(Toolkit.getDefaultToolkit().getImage("assets/decorations/Sign_Warning.png"), new Coordinate(1,1)));
     }
 
     /**

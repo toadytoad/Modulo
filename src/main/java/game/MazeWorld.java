@@ -41,6 +41,15 @@ public class MazeWorld extends World {
      */
     @Override
     public void paint (Graphics g) {
+        g.setFont(new Font("default", Font.PLAIN,20));
+        g.setColor(Color.WHITE);
+        g.drawString("Make it to the other side of the maze", 20,50);
+        g.drawString("by solving the equations that appear.",20,80);
+        g.drawString("The x-variable corresponds to your",20,110);
+        g.drawString("horizontal coordinate, and the",20,140);
+        g.drawString("y-variable corresponds to your",20,170);
+        g.drawString("vertical coordinate.",20,200);
+
         if (player.coordinate.y < 29 && player.coordinate.y > 3) {
             if (!timer.isRunning()) timer.start();
         } else {
@@ -58,7 +67,7 @@ public class MazeWorld extends World {
             counter = TIME_PER_QUESTION + 10;
         }
 
-        if (mazeActive && current.next instanceof MazeTile && player.coordinate.y < ((MazeTile)current.next).y + 3) {
+        if (mazeActive && current.next instanceof MazeTile && player.coordinate.y < ((MazeTile)current.next).y + 1) {
             burnAroundPlayer();
         }
 
@@ -71,15 +80,12 @@ public class MazeWorld extends World {
             counter = 0;
             current = (MazeTile) current.next;
             if (current != null) {
-                if (!popupLayer.isEmpty()) removePopup(popupLayer.get(0));
+                if (!popupLayer.isEmpty()) removePopup(popupLayer.get(popupLayer.size()-1));
                 generateNextPopup(current);
             }
         }
 
         super.paint(g);
-        for (Popup popup : popupLayer) {
-            popup.isVisible = true;
-        }
 //        g.setColor(Color.WHITE);
 //        g.drawString(Integer.toString(counter), 100, 100);
 
@@ -95,11 +101,8 @@ public class MazeWorld extends World {
      * to walk on.
      */
     private void burnAroundPlayer () {
-        for (int i = player.coordinate.x - 1; i <= player.coordinate.x + 1; i++) {
-            for (int j = player.coordinate.y - 1; j <= player.coordinate.y + 1; j++) {
-                if (i < 0 || i > 8 || j < 4 || j > 28) {
-                    continue;
-                }
+        for (int i = 0; i < 9; i++) {
+            for (int j = 4; j < 29; j++) {
                 if (i == ((MazeTile)current.next).x && j == ((MazeTile)current.next).y + 4) continue;
                 ((MazeTile)map[i][j]).burn();
             }
@@ -126,7 +129,9 @@ public class MazeWorld extends World {
         if (mazeTile.next instanceof MazeTile) {
             Popup popup = new Popup(100, 500,
                     new ArrayList<>(),
-                    true,new ArrayList<>());
+                    true,
+                    new ArrayList<>(),
+                    true);
             BufferedImage bg;
             if (((MazeTile)current.next).y > 11) {
                 Problem p = ProblemFactory.getLinearEquation(1, 5, "x", ((MazeTile) mazeTile.next).x);
